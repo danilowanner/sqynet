@@ -1,0 +1,19 @@
+{
+  "name": "sqynet",
+  "version": "0.0.0",
+  "description": "User iterface for sqynet, a QONQR game tool by the Swarm faction.",
+  "main": "app/main.js",
+  "dependencies": {
+    "jsx-loader": "^0.13.2",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --devtool eval --hot --progress --colors --content-base build"
+  },
+  "author": "Danilo Wanner",
+  "license": "MIT"
+}
