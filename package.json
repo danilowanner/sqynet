@@ -10,12 +10,13 @@
   },
   "devDependencies": {
     "css-loader": "^0.15.6",
+    "react-hot-loader": "^1.2.8",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"
   },
   "scripts": {
-    "dev": "webpack-dev-server --devtool eval --hot --progress --colors --content-base build"
+    "dev": "webpack-dev-server --progress"
   },
   "author": "Danilo Wanner",
   "license": "MIT"
