@@ -43,7 +43,10 @@ module.exports = React.createClass({
     return {
       user: {ID: null, Username: "ElphCrimLester"},
       modules: [
-        <Module type="welcome" />
+        <Module type="welcome"
+          title="Welcome to sQynet!"
+          getZoneTest={this.getZoneTest}
+          getAccountTest={this.getAccountTest}/>
       ]
     };
   },
@@ -92,6 +95,7 @@ module.exports = React.createClass({
     var modules = this.state.modules;
     modules.push(
       <Module type="welcome"
+        title="Pushed Module"
         getZoneTest={this.getZoneTest}
         getAccountTest={this.getAccountTest} />
     )
