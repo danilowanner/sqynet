@@ -1,5 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
 body {
   background-color: #333;
   color: #fff;
@@ -13,6 +17,9 @@ body {
 h1,
 h2 {
   font-weight: 300;
+}
+h1 {
+  font-size: 1.8em;
 }
 
 input[type=text],
@@ -37,10 +44,29 @@ input:focus {
   outline: none;
 }
 
+/* SqynetApp Component */
+.SqynetApp {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+}
+.SqynetApp .MenuBar {
+  flex: 0 0 2em;
+}
+.SqynetApp .modules {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5em;
+}
+
+
 /* MenuBar Component */
 .MenuBar {
   align-items: center;
-  background-color: #222;
+  background-color: rgba(10, 10, 10, 0.5);
+  border-bottom: 1px solid #3a4;
   height: 2em;
   padding: 1em;
   display: flex;
@@ -75,4 +101,20 @@ input:focus {
 }
 .Account form input:first-child {
   margin-left: 0;
+}
+
+/* Module Component */
+.Module {
+  box-sizing: border-box;
+  background-color: rgba(20, 20, 20, 0.5);
+  padding: 1em;
+  margin: 0.5em;
+  min-width: calc( 33.33% - 1em );
+}
+
+.Module h1 {
+  box-sizing: border-box;
+  background-color: rgba(20, 220, 60, 0.5);
+  margin: -0.5556em -0.5556em 0.5em -0.5556em;
+  padding: 0.5em;
 }

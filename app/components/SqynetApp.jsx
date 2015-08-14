@@ -2,6 +2,7 @@ var React = require('react');
 require('whatwg-fetch');
 
 var MenuBar = require('./MenuBar.jsx');
+var Module = require('./Module.jsx');
 
 /* Helpers */
 var getAPI = function(path, formData) {
@@ -41,7 +42,9 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       user: {ID: null, Username: "ElphCrimLester"},
-      zones: []
+      modules: [
+        <Module type="welcome" />
+      ]
     };
   },
 
@@ -85,14 +88,42 @@ module.exports = React.createClass({
       }).catch(this.onParsingFail)
   },
 
+  addModule: function() {
+    var modules = this.state.modules;
+    modules.push(
+      <Module type="welcome"
+        getZoneTest={this.getZoneTest}
+        getAccountTest={this.getAccountTest} />
+    )
+    this.setState({modules: modules} )
+  },
+
+  removeModule: function() {
+    var modules = this.state.modules;
+    modules.pop()
+    this.setState({modules: modules} )
+  },
+
+  onNavigate: function(where) {
+    switch (where) {
+      case "":
+
+        break;
+      default:
+
+    }
+  },
+
   render: function () {
     return (
-      <div>
-        <MenuBar user={this.state.user} onSignIn={this.onSignIn}/>
-        <h1>Hello world!</h1>
-        Welcome to sQynet!
-        <br/><a onClick={this.getZoneTest}>Get Zone Test</a>
-        <br/><a onClick={this.getAccountTest}>Get Account Test</a>
+      <div className="SqynetApp">
+        <MenuBar user={this.state.user}
+          addModule={this.addModule}
+          removeModule={this.removeModule}
+          onSignIn={this.onSignIn}/>
+        <section className="modules">
+          { this.state.modules }
+        </section>
       </div>
     );
   }

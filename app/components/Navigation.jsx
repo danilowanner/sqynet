@@ -5,8 +5,8 @@ module.exports = React.createClass({
   render: function () {
     return (
       <nav className="Navigation">
-        <a>Zone module</a>
-        <a>User module</a>
+        <a onClick={this.props.addModule}>Push Module</a>
+        <a onClick={this.props.removeModule}>Pop Module</a>
       </nav>
     );
   }

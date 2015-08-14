@@ -8,7 +8,9 @@ module.exports = React.createClass({
     return (
       <div className="MenuBar">
         <h1>sQynet<sup>beta</sup></h1>
-        <Navigation account={this.props.account} />
+        <Navigation
+          addModule={this.props.addModule}
+          removeModule={this.props.removeModule} />
         {
           //console.log(this.props.account)
         }
