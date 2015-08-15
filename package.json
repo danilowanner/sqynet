@@ -1,7 +1,7 @@
 {
   "name": "sqynet",
   "version": "0.0.0",
-  "description": "User iterface for sqynet, a QONQR game tool by the Swarm faction.",
+  "description": "User interface for sqynet, a QONQR game tool by the Swarm faction.",
   "main": "app/main.js",
   "dependencies": {
     "jsx-loader": "^0.13.2",
