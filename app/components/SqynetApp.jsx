@@ -5,7 +5,7 @@ var MenuBar = require('./MenuBar.jsx');
 var Module = require('./Module.jsx');
 
 /* Helpers */
-var getAPI = function(path, formData) {
+var getAPI = function(path) {
   var config = {
     method: 'get',
     headers: {
@@ -41,7 +41,7 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      user: {ID: null, Username: "ElphCrimLester"},
+      user: {ID: null, Username: "Lithagon"},
       modules: [
         <Module type="welcome"
           title="Welcome to sQynet!"
@@ -95,7 +95,7 @@ module.exports = React.createClass({
     var modules = this.state.modules;
     modules.push(
       <Module type="welcome"
-        title="Pushed Module"
+        title="My Module"
         getZoneTest={this.getZoneTest}
         getAccountTest={this.getAccountTest} />
     )
