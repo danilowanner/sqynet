@@ -1,5 +1,6 @@
 var React = require('react');
 var ContentRegistrationForm = require('./ContentRegistrationForm.jsx');
+var ContentAddModule = require('./ContentAddModule.jsx');
 
 module.exports = React.createClass({
 
@@ -11,7 +12,7 @@ module.exports = React.createClass({
   render: function () {
     switch (this.props.type) {
       case "welcome":
-        var title = "Welcome to sQynet";
+        var title = <h1>Welcome to sQynet</h1>;
         var content =
           <p>
             Welcome to sQynet!
@@ -19,16 +20,20 @@ module.exports = React.createClass({
             <br/><a onClick={this.props.getAccountTest}>Get Account Test</a>
           </p>
         break;
+      case "addmodule":
+        var title = "";
+        var content = <ContentAddModule do={this.props.do}/>
+        break;
       case "registration":
-        var title = "Registration";
+        var title = <h1>Registration</h1>;
         var content = <ContentRegistrationForm />
         break;
       default:
         var content = "Module not found"
     }
     return (
-      <div className="Module">
-        <h1>{ title }</h1>
+      <div className={ "Module "+this.props.type }>
+        { title }
         { content }
       </div>
     );

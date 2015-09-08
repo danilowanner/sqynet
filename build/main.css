@@ -73,8 +73,6 @@ select:focus  {
 }
 .SqynetApp .modules {
   flex: 1;
-  display: flex;
-  flex-wrap: wrap;
   padding: 0.5em;
 }
 
@@ -121,16 +119,17 @@ select:focus  {
   margin-left: 0;
 }
 
-/* Module Component */
+/* Module.jsx Component */
 .Module {
   background: linear-gradient(135deg, rgba(0,142,125,0.60) 0%,rgba(0,185,82,0.4) 50%,rgba(0,142,125,0.60) 100%);
   box-sizing: border-box;
   box-shadow: 1px 1px 10px rgba(50,252,215,0.3);
   border: 1px solid rgba(50,255,132,0.3);
-  flex: 1;
+  display: inline-block;
   margin: 0.5em;
-  min-width: calc( 33.33% - 1em );
+  max-width: calc( 33.33% - 1em );
   text-shadow: 1px 1px 4px #046;
+  vertical-align: top;
 }
 .Module h1 {
   background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
@@ -146,10 +145,63 @@ select:focus  {
 .Module p {
   padding: 0 1em 0 1em;
 }
+/* MModule.jsx Component – addmodule */
+.Module.addmodule > div {
+  background-image: url(/assets/sqynet_addModule.svg);
+  background-size: 2em 2em;
+  background-repeat: no-repeat;
+  background-position: 0.6em 0.6em;
+  cursor: pointer;
+  min-width: 3em;
+  min-height: 3em;
+  overflow: hidden;
+}
+.Module.addmodule ul {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 3em;
+}
+.Module.addmodule ul li {
+  border-bottom: 1px solid rgba(50,255,132,0.3);
+  height: 3em;
+  line-height: 3em;
+  margin: 0;
+  padding: 0 1em 0 1em;
+}
+.Module.addmodule ul li:hover {
+  background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
+}
+.Module.addmodule > div:hover ul {
+  display: block;
+}
+/* slideInOut CSS Transition */
+.slideInOut-enter {
+  opacity: 0.01;
+  transform: scale3d(0,0,0);
+  margin: 0 -100px 0 -100px  !important;
+}
+.slideInOut-enter.slideInOut-enter-active {
+  opacity: 1;
+  transform: scale3d(1,1,1);
+  margin: 0 !important;
+  transition: all .2s ease-out;
+}
+.slideInOut-leave {
+  opacity: 1;
+  transform: scale3d(1,1,1);
+  margin: 0 !important;
+}
+.slideInOut-leave.slideInOut-leave-active {
+  opacity: 0.01;
+  transform: scale3d(0,0,0);
+  margin: 0 -100px 0 -100px  !important;
+  transition: all .18s ease-in;
+  transition-property: opacity, transform, margin;
+}
 
 
 /* Content Components */
-
 .Content label {
   font-size: 0.8em;
   display: block;

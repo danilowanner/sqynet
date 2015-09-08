@@ -21,8 +21,10 @@ module.exports = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-
-    this.props.onSignIn(this.state.formData.user, this.state.formData.password);
+    var formData = new FormData();
+    formData.append('user', this.state.formData.user);
+    formData.append('password', this.state.formData.password);
+    this.props.do("signIn",formData);
   },
 
   render: function () {

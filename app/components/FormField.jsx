@@ -15,7 +15,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       <p className="FormField">
-        <label for="{this.props.name}">{this.props.label}</label>
+        <label htmlFor="{this.props.name}">{this.props.label}</label>
         <input onChange={this.onChange} type="text" name={this.props.name} value={this.state.value} />
       </p>
     );

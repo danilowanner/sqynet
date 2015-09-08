@@ -55,17 +55,11 @@ module.exports = React.createClass({
   onParsingFail: function(ex) {
     console.log('JSON parsing failed', ex)
   },
-
-  onSignIn: function(user,password) {
-    var formData = new FormData();
-    formData.append('user', user);
-    formData.append('password', password);
-
+  signIn: function(formData) {
     postAPI('login', formData)
       .then(this.onSignInResponse)
       .catch(this.onParsingFail)
   },
-
   onSignInResponse: function(json) {
     if(json.error) {
       console.log(json);
@@ -73,54 +67,47 @@ module.exports = React.createClass({
       this.setState({user: json.user})
     }
   },
-
+  addModule: function(type) {
+    var modules = this.state.modules;
+    modules.push(
+      <Module type={type} />
+    )
+    this.setState({modules: modules} )
+  },
+  removeModule: function() {
+    var modules = this.state.modules;
+    modules.pop()
+    this.setState({modules: modules} )
+  },
   getZoneTest: function() {
     getAPI('getZone')
       .then(function(json) {
         console.log('parsed json', json)
       }).catch(this.onParsingFail)
   },
-
   getAccountTest: function() {
     getAPI('getAccount')
       .then(function(json) {
         console.log('parsed json', json)
       }).catch(this.onParsingFail)
   },
-
-  addModule: function() {
-    var modules = this.state.modules;
-    modules.push(
-      <Module type="registration" />
-    )
-    this.setState({modules: modules} )
-  },
-
-  removeModule: function() {
-    var modules = this.state.modules;
-    modules.pop()
-    this.setState({modules: modules} )
-  },
-
-  onNavigate: function(where) {
-    switch (where) {
-      case "":
-
-        break;
-      default:
-
+  do: function(what,argument) {
+    switch (what) {
+      case "addModule": this.addModule(argument); break;
+      case "removeModule": this.removeModule(argument); break;
+      case "getZoneTest": this.getZoneTest(argument); break;
+      case "getAccountTest": this.getAccountTest(argument); break;
+      case "signIn": this.signIn(argument); break;
     }
   },
 
   render: function () {
     return (
       <div className="SqynetApp">
-        <MenuBar user={this.state.user}
-          addModule={this.addModule}
-          removeModule={this.removeModule}
-          onSignIn={this.onSignIn}/>
+        <MenuBar user={this.state.user} do={this.do}/>
         <section className="modules">
           { this.state.modules }
+          <Module type="addmodule" do={this.do} />
         </section>
       </div>
     );
