@@ -1,6 +1,7 @@
 var React = require('react');
 var ContentRegistrationForm = require('./ContentRegistrationForm.jsx');
 var ContentAddModule = require('./ContentAddModule.jsx');
+var ContentZones = require('./ContentZones.jsx');
 
 module.exports = React.createClass({
 
@@ -24,12 +25,17 @@ module.exports = React.createClass({
         var title = "";
         var content = <ContentAddModule do={this.props.do}/>
         break;
+      case "zones":
+        var title = <h1>Zones</h1>;
+        var content = <ContentZones do={this.props.do}/>
+        break;
       case "registration":
         var title = <h1>Registration</h1>;
-        var content = <ContentRegistrationForm />
+        var content = <ContentRegistrationForm do={this.props.do} />
         break;
       default:
-        var content = "Module not found"
+        var title = <h1>{ this.props.type }</h1>;
+        var content = <p>Module not found</p>;
     }
     return (
       <div className={ "Module "+this.props.type }>
