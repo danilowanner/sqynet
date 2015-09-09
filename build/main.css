@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Work+Sans:200,300,600);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
 html, body {
   height: 100%;
@@ -21,7 +21,7 @@ body {
 
 h1,
 h2 {
-  font-weight: 200;
+  font-weight: 300;
 }
 h1 {
   font-size: 2em;
@@ -143,11 +143,12 @@ select:focus  {
   box-sizing: border-box;
   border-bottom: 1px solid rgba(50,255,132,0.3);
   color: rgb(50,255,132);
-  font-size: 1em;
+  font-size: 0.9em;
+  font-weight: 600;
   margin: 0 0 0.5em 0;
   padding: 0.5em 1em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
 }
 .Module p {
   padding: 0 1em 0 1em;
