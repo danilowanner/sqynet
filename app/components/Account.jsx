@@ -4,13 +4,13 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      formData: {user: this.props.user.Username, password: ""}
+      formData: {username: this.props.user.Username, password: ""}
     };
   },
 
-  onChangeUser: function(e) {
+  onChangeUsername: function(e) {
     var formData = this.state.formData;
-    formData.user = e.target.value;
+    formData.username = e.target.value;
     this.setState({formData: formData});
   },
   onChangePassword: function(e) {
@@ -21,10 +21,9 @@ module.exports = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    var formData = new FormData();
-    formData.append('user', this.state.formData.user);
-    formData.append('password', this.state.formData.password);
-    this.props.do("signIn",formData);
+    var loginform = React.findDOMNode(this.refs.loginform);
+    var formData = new FormData(loginform);
+    this.props.do("apiLogin",formData);
   },
 
   render: function () {
@@ -37,9 +36,9 @@ module.exports = React.createClass({
           user.ID ?
             <h2>Hallo {user.Username}!</h2>
           :
-            <form onSubmit={this.handleSubmit}>
-              <input onChange={this.onChangeUser} type="text" value={formData.user} />
-              <input onChange={this.onChangePassword} type="password" value={formData.password} />
+            <form onSubmit={this.handleSubmit} ref="loginform">
+              <input onChange={this.onChangeUsername} type="text" name="username" value={formData.username} />
+              <input onChange={this.onChangePassword} type="password" name="password"  value={formData.password} />
               <input type="submit" value="Login" />
             </form>
         }

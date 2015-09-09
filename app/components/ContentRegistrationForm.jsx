@@ -10,17 +10,19 @@ module.exports = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    alert("submit");
+    var form = React.findDOMNode(this.refs.form);
+    var formData = new FormData(form);
+    this.props.do("apiRegister",formData);
   },
 
   render: function () {
     return (
       <div className="Content ContentRegistrationForm">
-        <form onSubmit={this.handleSubmit}>
-          <FormField name="username" label="Username" value=""/>
-          <FormField name="password" label="Password" value=""/>
-          <FormField name="repeat" label="Repeat Password" value=""/>
-          <FormField name="email" label="Email" value=""/>
+        <form onSubmit={this.handleSubmit} ref="form">
+          <FormField name="username" label="Username" value={this.state.username} />
+          <FormField name="password" label="Password" type="password" value={this.state.password} />
+          <FormField name="repeat" label="Repeat Password" type="password" value={this.state.repeat} />
+          <FormField name="email" label="Email" value={this.state.email} />
           <p>
             This e-mail will be used to inform you of detected zone changes, alerts and general information from sQynet.
           </p>
