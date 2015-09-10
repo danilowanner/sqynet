@@ -41,7 +41,11 @@ module.exports = React.createClass({
       case "onLogin": this.onLogin(argument); break;
       case "onRegister": this.onRegister(argument); break;
       case "onUsernameChange": this.onUsernameChange(argument); break;
+      case "focusLogin": this.focusLogin(argument); break;
     }
+  },
+  focusLogin: function() {
+    // TODO
   },
   onUsernameChange: function(username) {
     var user = this.state.user;

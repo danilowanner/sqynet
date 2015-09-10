@@ -1,4 +1,5 @@
 var React = require('react');
+var ContentWelcome = require('./ContentWelcome.jsx');
 var ContentRegistrationForm = require('./ContentRegistrationForm.jsx');
 var ContentAddModule = require('./ContentAddModule.jsx');
 var ContentZones = require('./ContentZones.jsx');
@@ -14,12 +15,7 @@ module.exports = React.createClass({
     switch (this.props.type) {
       case "welcome":
         var title = <h1>Welcome to sQynet</h1>;
-        var content =
-          <p>
-            Welcome to sQynet!
-            <br/><a onClick={this.props.getZoneTest}>Get Zone Test</a>
-            <br/><a onClick={this.props.getAccountTest}>Get Account Test</a>
-          </p>
+        var content = <ContentWelcome do={this.props.do}/>
         break;
       case "addmodule":
         var title = "";
