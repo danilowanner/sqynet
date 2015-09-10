@@ -11,9 +11,11 @@ module.exports = React.createClass({
     return (
       <p>
         Here are your first steps:
-        <br/>1. <a onClick={this.onClickRegister}>Register</a>
-        <br/>2. <a onClick={this.onClickLogin}>Log in</a>
-        <br/>3. <a onClick={this.onClickSurveillance}>Add Surveillance</a>
+        <ol>
+          <li><a onClick={this.onClickRegister}>Register</a></li>
+          <li><a onClick={this.onClickLogin}>Log in</a></li>
+          <li><a onClick={this.onClickSurveillance}>Add Surveillance</a></li>
+        </ol>
       </p>
     );
   },

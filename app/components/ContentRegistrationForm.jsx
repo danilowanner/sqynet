@@ -21,7 +21,7 @@ module.exports = React.createClass({
           <p>
             This e-mail will be used to inform you of detected zone changes, alerts and general information from sQynet.
           </p>
-          <input type="submit" value="Register" />
+          <p><input type="submit" value="Register" /></p>
         </form>
       </div>
     );
