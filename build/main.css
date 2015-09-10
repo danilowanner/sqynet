@@ -72,7 +72,7 @@ select:focus  {
   flex: 0 0 2em;
 }
 .SqynetApp .modules {
-  padding: 0.5em;
+  padding: 1em 0.5em;
 }
 .SqynetApp .modules::after {
   visibility: hidden;
@@ -135,8 +135,30 @@ select:focus  {
   display: inline-block;
   margin: 0.5em;
   max-width: calc( 33.33% - 1em );
+  position: relative;
   text-shadow: 1px 1px 4px #046;
   vertical-align: top;
+}
+.Module .index,
+.Module .close {
+  font-size: 0.6em;
+  position: absolute;
+  top: -3em;
+  left: -1em;
+  padding: 1em;
+  color: rgba(50,255,132,0.5);
+}
+.Module .close {
+  left: auto;
+  right: -1em;
+  cursor: pointer;
+}
+.Module .close>div {
+  display: none;
+  color: #fff;
+}
+.Module .close:hover>div {
+  display: inline;
 }
 .Module h1 {
   background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
@@ -154,7 +176,7 @@ select:focus  {
   padding: 0 1em 0 1em;
 }
 /* MModule.jsx Component – addmodule */
-.Module.addmodule > div {
+.Module.addmodule .ContentAddModule {
   background-image: url(/assets/sqynet_addModule.svg);
   background-size: 2em 2em;
   background-repeat: no-repeat;

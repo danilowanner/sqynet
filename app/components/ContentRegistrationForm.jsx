@@ -1,18 +1,13 @@
-var React = require('react');
+var React = require('react')
 var FormField = require('./FormField.jsx')
+
+var helpers = require('../helpers.js')
 
 module.exports = React.createClass({
 
   getInitialState: function() {
     return {
     };
-  },
-
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var form = React.findDOMNode(this.refs.form);
-    var formData = new FormData(form);
-    this.props.do("apiRegister",formData);
   },
 
   render: function () {
@@ -30,5 +25,30 @@ module.exports = React.createClass({
         </form>
       </div>
     );
+  },
+
+  /* Custom Methods */
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var form = React.findDOMNode(this.refs.form);
+    var formData = new FormData(form);
+    this.apiRegister(formData)
+  },
+  apiRegister: function(formData) {
+    helpers.postAPI('register', formData)
+      .then(this.onRegisterResponse)
+      .catch(this.onParsingFail)
+  },
+  onParsingFail: function(ex) {
+    console.log('JSON parsing failed', ex)
+  },
+  onRegisterResponse: function(json) {
+    if(json.error) {
+      console.log(json)
+    } else {
+      this.props.onRegister();
+      this.props.do("onRegister",json.username)
+    }
   }
+
 });

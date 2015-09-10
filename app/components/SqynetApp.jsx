@@ -1,55 +1,18 @@
 var React = require('react');
-require('whatwg-fetch');
 
 var MenuBar = require('./MenuBar.jsx');
 var Module = require('./Module.jsx');
-
-/* Helpers */
-var getAPI = function(path) {
-  var config = {
-    method: 'get',
-    headers: {
-      'Accept': 'application/json'
-    },
-    credentials: 'include'
-  }
-
-  return window .fetch('http://public-api.sqynet.ch/'+path,config)
-                .then(function(response) {
-                  return response.json()
-                })
-}
-var postAPI = function(path, formData) {
-  var config = {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json'
-    },
-    credentials: 'include',
-    body: formData
-  }
-
-  return window .fetch('http://public-api.sqynet.ch/'+path,config)
-                .then(function(response) {
-                  return response.json()
-                })
-}
-
 
 /* Module, export component */
 module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      user: {ID: null, Username: "Lithagon"},
+      user: {ID: null, Username: "Username"},
       modules: [
-        <Module type="welcome" do={this.do}  />
+        {type: "welcome"}
       ]
     };
-  },
-
-  componentDidMount: function() {
-
   },
 
   render: function () {
@@ -57,7 +20,11 @@ module.exports = React.createClass({
       <div className="SqynetApp">
         <MenuBar user={this.state.user} do={this.do}/>
         <section className="modules">
-          { this.state.modules }
+          {
+            this.state.modules.map((module, index) =>
+              <Module type={module.type} do={this.do} index={index} key={index} />
+            )
+          }
           <Module type="addmodule" do={this.do} />
         </section>
       </div>
@@ -71,52 +38,46 @@ module.exports = React.createClass({
       case "removeModule": this.removeModule(argument); break;
       case "getZoneTest": this.getZoneTest(argument); break;
       case "getAccountTest": this.getAccountTest(argument); break;
-      case "apiLogin": this.apiLogin(argument); break;
-      case "apiRegister": this.apiRegister(argument); break;
+      case "onLogin": this.onLogin(argument); break;
+      case "onRegister": this.onRegister(argument); break;
+      case "onUsernameChange": this.onUsernameChange(argument); break;
     }
   },
-  onParsingFail: function(ex) {
-    console.log('JSON parsing failed', ex)
+  onUsernameChange: function(username) {
+    var user = this.state.user;
+    user.Username = username;
+    this.setState({user: user});
   },
-  apiLogin: function(formData) {
-    postAPI('login', formData)
-      .then(this.onLoginResponse)
-      .catch(this.onParsingFail)
-  },
-  onLoginResponse: function(json) {
-    if(json.error) {
-      console.log(json);
-    } else {
-      this.setState({user: json.user})
+  onRegister: function(username) {
+    console.log("onRegister "+username);
+    if(this.state.user.ID==null) {
+      this.setState({user: {ID: null, Username: username}});
     }
   },
-  apiRegister: function(formData) {
-    postAPI('register', formData)
-      .then(this.onRegisterResponse)
-      .catch(this.onParsingFail)
+  onLogin: function(user) {
+    this.setState({user: user});
   },
   addModule: function(type) {
-    var modules = this.state.modules;
-    modules.push(
-      <Module type={type} do={this.do} />
-    )
+    var modules = this.state.modules
+    modules.push({type: type})
     this.setState({modules: modules} )
   },
-  removeModule: function() {
+  removeModule: function(index) {
     var modules = this.state.modules;
-    modules.pop()
+    modules.splice(index, 1);
     this.setState({modules: modules} )
   },
   getZoneTest: function() {
-    getAPI('getZone')
+    helpers.getAPI('getZone')
       .then(function(json) {
         console.log('parsed json', json)
       }).catch(this.onParsingFail)
   },
   getAccountTest: function() {
-    getAPI('getAccount')
+    helpers.getAPI('getAccount')
       .then(function(json) {
         console.log('parsed json', json)
       }).catch(this.onParsingFail)
   }
+
 });

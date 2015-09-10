@@ -24,7 +24,7 @@ module.exports = React.createClass({
       : "";
 
     return (
-      <div onClick={this.toggleOpen}>
+      <div className="ContentAddModule" onClick={this.toggleOpen}>
         <ReactCSSTransitionGroup transitionName="slideInOut">
           { menu }
         </ReactCSSTransitionGroup>

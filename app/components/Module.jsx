@@ -31,7 +31,7 @@ module.exports = React.createClass({
         break;
       case "registration":
         var title = <h1>Registration</h1>;
-        var content = <ContentRegistrationForm do={this.props.do} />
+        var content = <ContentRegistrationForm do={this.props.do} onRegister={this.removeModule} />
         break;
       default:
         var title = <h1>{ this.props.type }</h1>;
@@ -40,8 +40,19 @@ module.exports = React.createClass({
     return (
       <div className={ "Module "+this.props.type }>
         { title }
+        <div className="index">00.00{this.props.index}</div>
+        {
+          this.props.index != undefined ?
+            <div className="close" onClick={this.removeModule}>x<div> close</div></div>
+            : ""
+        }
         { content }
       </div>
     );
+  },
+
+  /* Custom Methods */
+  removeModule: function() {
+    this.props.do("removeModule",this.props.index)
   }
 });
