@@ -36,7 +36,7 @@ module.exports = React.createClass({
     return (
       <div className={ "Module "+this.props.type }>
         { title }
-        <div className="index">00.00{this.props.index}</div>
+        <div className="index">00.0{this.props.index}.00{this.props.moduleKey}</div>
         {
           this.props.index != undefined ?
             <div className="close" onClick={this.removeModule}>x<div> close</div></div>

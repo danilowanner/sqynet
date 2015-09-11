@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react/addons');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var MenuBar = require('./MenuBar.jsx');
 var Module = require('./Module.jsx');
@@ -10,8 +11,9 @@ module.exports = React.createClass({
     return {
       user: {ID: null, Username: "Username"},
       modules: [
-        {type: "welcome"}
-      ]
+        {key: 1, type: "welcome"}
+      ],
+      lastModuleKey: 1
     };
   },
 
@@ -20,11 +22,13 @@ module.exports = React.createClass({
       <div className="SqynetApp">
         <MenuBar user={this.state.user} do={this.do}/>
         <section className="modules">
+          <ReactCSSTransitionGroup transitionName="slideInOut">
           {
             this.state.modules.map((module, index) =>
-              <Module type={module.type} do={this.do} index={index} key={index} />
+              <Module type={module.type} do={this.do} index={index} moduleKey={module.key} key={module.key} />
             )
           }
+          </ReactCSSTransitionGroup>
           <Module type="addmodule" do={this.do} />
         </section>
       </div>
@@ -63,8 +67,9 @@ module.exports = React.createClass({
   },
   addModule: function(type) {
     var modules = this.state.modules
-    modules.push({type: type})
-    this.setState({modules: modules} )
+    var key = this.state.lastModuleKey+1;
+    modules.push({key: key, type: type})
+    this.setState({modules: modules, lastModuleKey: key} )
   },
   removeModule: function(index) {
     var modules = this.state.modules;
