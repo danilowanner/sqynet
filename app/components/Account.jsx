@@ -16,7 +16,10 @@ module.exports = React.createClass({
       <div className="Account">
         {
           user.ID ?
-            <h2>Hallo {user.Username}!</h2>
+            <div>
+              <h2>Hello {user.Username}!</h2>
+              <input onClick={this.apiLogout} type="button" value="Logout" />
+            </div>
           :
             <form onSubmit={this.handleSubmit} ref="loginform">
               <input onChange={this.onUsernameChange} type="text" name="username" placeholder="Username" value={this.props.user.Username} />
@@ -50,6 +53,20 @@ module.exports = React.createClass({
     } else {
       this.props.do("addMessage",{type: "success", content: "Action successful: "+json.success})
       this.props.do("onLogin",json.user)
+    }
+  },
+  apiLogout: function() {
+    helpers.getAPI('logout')
+      .then(this.onLogoutResponse)
+      .catch(this.onParsingFail)
+  },
+  onLogoutResponse: function(json) {
+    if(json.error) {
+      console.log(json)
+      this.props.do("addMessage",{type: "error", content: json.errorString})
+    } else {
+      this.props.do("addMessage",{type: "success", content: "Goodbye "+this.props.user.Username})
+      this.props.do("onLogout")
     }
   },
   onParsingFail: function(ex) {

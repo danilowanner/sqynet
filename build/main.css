@@ -54,6 +54,17 @@ th:last-child {
   padding-right: 1em;
 }
 
+label,
+th {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 300;
+}
+label {
+  display: block;
+}
+
 input[type=text],
 input[type=number],
 input[type=password],
@@ -153,6 +164,10 @@ input:-webkit-autofill {
 .MenuBar .Account {
   width: auto;
   flex: none;
+}
+.MenuBar .Account h2{
+  display: inline-block;
+  margin-right: 0.6em;
 }
 
 /* Navigation.jsx Component */
@@ -309,13 +324,6 @@ input:-webkit-autofill {
 
 
 /* Content Components */
-.Content label {
-  font-size: 0.8em;
-  display: block;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 300;
-}
 .Content input {
   display: block;
   width: 100%;

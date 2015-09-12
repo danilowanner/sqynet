@@ -1,6 +1,8 @@
 var React = require('react/addons');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
+var helpers = require('../helpers.js');
+
 var MenuBar = require('./MenuBar.jsx');
 var Module = require('./Module.jsx');
 var Message = require('./Message.jsx');
@@ -18,6 +20,9 @@ module.exports = React.createClass({
       messages: [],
       lastMessageKey: 0,
     };
+  },
+  componentDidMount: function() {
+    this.apiGetAccount()
   },
 
   render: function () {
@@ -55,11 +60,22 @@ module.exports = React.createClass({
       case "addMessage": this.addMessage(argument); break;
       case "removeMessage": this.removeMessage(argument); break;
       case "onLogin": this.onLogin(argument); break;
+      case "onLogout": this.onLogout(argument); break;
       case "onRegister": this.onRegister(argument); break;
       case "onUsernameChange": this.onUsernameChange(argument); break;
       case "focusLogin": this.focusLogin(argument); break;
-      case "getZoneTest": this.getZoneTest(argument); break;
-      case "getAccountTest": this.getAccountTest(argument); break;
+    }
+  },
+  apiGetAccount: function() {
+    helpers.getAPI('getAccount')
+      .then(this.onGetAccountResponse)
+      .catch(this.onParsingFail)
+  },
+  onGetAccountResponse: function(json) {
+    if(json.error) {
+      // Not logged in
+    } else {
+      this.setState({user: json.user})
     }
   },
   focusLogin: function() {
@@ -78,6 +94,9 @@ module.exports = React.createClass({
   },
   onLogin: function(user) {
     this.setState({user: user});
+  },
+  onLogout: function() {
+    this.setState({user: {ID: null, Username: ""}});
   },
   addModule: function(type) {
     var modules = this.state.modules
@@ -101,18 +120,8 @@ module.exports = React.createClass({
     messages.splice(index, 1);
     this.setState({messages: messages} )
   },
-
-  getZoneTest: function() {
-    helpers.getAPI('getZone')
-      .then(function(json) {
-        console.log('parsed json', json)
-      }).catch(this.onParsingFail)
-  },
-  getAccountTest: function() {
-    helpers.getAPI('getAccount')
-      .then(function(json) {
-        console.log('parsed json', json)
-      }).catch(this.onParsingFail)
+  onParsingFail: function(ex) {
+    console.log('JSON parsing failed', ex)
   }
 
 });
