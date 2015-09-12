@@ -7,22 +7,55 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      showList: true,
+      loading: true,
+      surveillanceAreas: []
     };
+  },
+  componentDidMount: function() {
+    this.apiGetSurveillanceAreas()
   },
 
   render: function () {
-    return (
-      <div className="Content ContentSurveillance">
+    var list = this.state.loading ? <p>loading</p> :
+      <div>
+        <table>
+          <tr>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Radius</th>
+          </tr>
+          {
+            this.state.surveillanceAreas.map((area, index) =>
+              <tr key={index}>
+                <td>{area.Latitude}</td>
+                <td>{area.Longitude}</td>
+                <td>{area.Radius}</td>
+              </tr>
+            )
+          }
+        </table>
+        <p><input type="button" onClick={this.toggleShowList} value="Add new surveillance area" /></p>
+      </div>
+
+    var form =
+      <div>
         <form onSubmit={this.handleSubmit} ref="form">
           <FormField name="latitude" label="Latitude (North/South)" type="number" value={0} />
           <FormField name="longitude" label="Longitude (East/West)" type="number" value={0} />
           <FormField name="radius" label="Radius (in km)" type="number" value={42} />
           <input type="hidden" name="type" value="1" />
           <p>
-            This will add a suveilance zone (circular) around the provided coordinates (lat/long). You will be notified of all zone changes in this zone.
+            This will add a suveilance zone (circular) around the provided coordinates (lat/long). You will be notified of all zone changes in this area.
           </p>
           <p><input type="submit" value="Add surveillance zone" /></p>
+          <p><input type="button" onClick={this.toggleShowList} value="Cancel" /></p>
         </form>
+      </div>
+
+    return (
+      <div className="Content ContentSurveillance">
+        { this.state.showList ? list : form }
       </div>
     );
   },
@@ -36,20 +69,39 @@ module.exports = React.createClass({
   },
   apiAddSurveillance: function(formData) {
     helpers.postAPI('addSurveillance', formData)
-      .then(this.onResponse)
+      .then(this.onAddResponse)
       .catch(this.onParsingFail)
   },
-  onParsingFail: function(ex) {
-    console.log('JSON parsing failed', ex)
-  },
-  onResponse: function(json) {
+  onAddResponse: function(json) {
     if(json.error) {
       console.log(json)
       this.props.do("addMessage",{type: "error", content: json.errorString})
     } else {
       this.props.do("addMessage",{type: "success", content: "Action successful: "+json.success})
-      // TODO update list of surveillance areas
+      this.setState({showList: true})
+      this.apiGetSurveillanceAreas()
     }
+  },
+  apiGetSurveillanceAreas: function() {
+    helpers.getAPI('getSurveillanceAreas')
+      .then(this.onGetResponse)
+      .catch(this.onParsingFail)
+  },
+  onGetResponse: function(json) {
+    if(json.error) {
+      console.log(json)
+      this.props.do("addMessage",{type: "error", content: json.errorString})
+    } else {
+      console.log(json);
+      this.setState({loading: false, surveillanceAreas: json.data})
+      this.props.do("addMessage",{type: "success", content: "Action successful: "+json.success})
+    }
+  },
+  onParsingFail: function(ex) {
+    console.log('JSON parsing failed', ex)
+  },
+  toggleShowList: function() {
+    this.setState({showList: !this.state.showList})
   }
 
 });

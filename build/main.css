@@ -38,10 +38,27 @@ a:hover {
   border-bottom: 1px solid rgba(50,255,132,0.6);
 }
 
+tr {
+  border-bottom: 1px solid rgba(50,255,132,0.3);
+}
+td,
+th {
+  padding: 0.4em 0.5em;
+}
+td:first-child,
+th:first-child {
+  padding-left: 1em;
+}
+td:last-child,
+th:last-child {
+  padding-right: 1em;
+}
+
 input[type=text],
 input[type=number],
 input[type=password],
-input[type=submit] {
+input[type=submit],
+input[type=button] {
   background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
   border: 1px solid rgba(50,255,132,0.3);
   box-sizing: border-box;
@@ -58,7 +75,8 @@ input[type=submit] {
 input[type=text]:focus,
 input[type=number]:focus,
 input[type=password]:focus,
-input[type=submit]:focus {
+input[type=submit]:focus,
+input[type=button]:focus {
   background: linear-gradient(135deg, rgba(50,252,215,0.6) 0%,rgba(50,255,132,0.4) 50%,rgba(137,255,251,0.6) 100%);
   border: 1px solid rgba(50,255,132,0.6);
   box-shadow: 1px 1px 8px rgba(0,40,70,0.5);
@@ -69,10 +87,12 @@ input[type=submit]:focus {
 input[type=text]:hover,
 input[type=number]:hover,
 input[type=password]:hover,
-input[type=submit]:hover {
+input[type=submit]:hover,
+input[type=button]:hover {
   border: 1px solid rgba(50,255,132,0.6);
 }
-input[type="submit"]:hover {
+input[type=submit]:hover,
+input[type=button]:hover {
   background: linear-gradient(135deg, rgba(50,252,215,0.6) 0%,rgba(50,255,132,0.4) 50%,rgba(137,255,251,0.6) 100%);
 }
 input:-webkit-autofill {
