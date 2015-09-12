@@ -45,6 +45,7 @@ module.exports = React.createClass({
   onRegisterResponse: function(json) {
     if(json.error) {
       console.log(json)
+      this.props.do("addMessage",{type: "error", content: json.errorString})
     } else {
       this.props.onRegister();
       this.props.do("onRegister",json.username)

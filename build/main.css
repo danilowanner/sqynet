@@ -102,6 +102,8 @@ input:-webkit-autofill {
   clear: both;
   height: 0;
 }
+.SqynetApp .messages {
+}
 
 
 /* MenuBar Component */
@@ -133,12 +135,12 @@ input:-webkit-autofill {
   flex: none;
 }
 
-/* Navigation Component */
+/* Navigation.jsx Component */
 .Navigation a {
   margin-right: 1em;
 }
 
-/* Account Component */
+/* Account.jsx Component */
 .Account form input {
   margin-left: 0.6em;
 }
@@ -226,6 +228,36 @@ input:-webkit-autofill {
 .Module.addmodule > div:hover ul {
   display: block;
 }
+
+/* Message.jsx Component */
+.Message {
+  background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(50,255,132,0.3);
+  flex: 0 0 1em;
+  padding: 0.4em 1em;
+  position: relative;
+}
+.Message.error {
+  background: linear-gradient(135deg, rgba(250,50,0,0.3) 0%,rgba(250,120,20,0.2) 50%,rgba(250,50,0,0.3) 100%);
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255,160,0,0.3);
+  flex: 0 0 1em;
+}
+.Message .time {
+  position: absolute;
+  right: 1em;
+  font-size: 0.8em;
+  color: rgba(50,255,132,0.6)
+}
+.Message .time .segment{
+  display: inline-block;
+  width: 4em;
+}
+.Message.error .time {
+  color: rgba(255,160,0,0.6);
+}
+
 
 /* slideInOut CSS Transition */
 .slideInOut-enter {

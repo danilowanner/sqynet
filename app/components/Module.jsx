@@ -3,6 +3,7 @@ var ContentWelcome = require('./ContentWelcome.jsx');
 var ContentRegistrationForm = require('./ContentRegistrationForm.jsx');
 var ContentAddModule = require('./ContentAddModule.jsx');
 var ContentZones = require('./ContentZones.jsx');
+var ContentSurveillance = require('./ContentSurveillance.jsx');
 
 module.exports = React.createClass({
 
@@ -28,6 +29,10 @@ module.exports = React.createClass({
       case "registration":
         var title = <h1>Registration</h1>;
         var content = <ContentRegistrationForm do={this.props.do} onRegister={this.removeModule} />
+        break;
+      case "surveillance":
+        var title = <h1>Surveillance</h1>;
+        var content = <ContentSurveillance do={this.props.do}/>
         break;
       default:
         var title = <h1>{ this.props.type }</h1>;

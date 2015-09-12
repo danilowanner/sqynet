@@ -17,7 +17,7 @@ module.exports = React.createClass({
     return (
       <p className="FormField">
         <label htmlFor="{this.props.name}">{this.props.label}</label>
-        <input onChange={this.onChange} type={this.state.type} name={this.props.name} value={this.state.value} />
+        <input onChange={this.onChange} type={this.state.type} step="any" name={this.props.name} value={this.state.value} />
       </p>
     );
   }

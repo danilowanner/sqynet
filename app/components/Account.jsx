@@ -19,8 +19,8 @@ module.exports = React.createClass({
             <h2>Hallo {user.Username}!</h2>
           :
             <form onSubmit={this.handleSubmit} ref="loginform">
-              <input onChange={this.onUsernameChange} type="text" name="username" value={this.props.user.Username} />
-              <input type="password" name="password" />
+              <input onChange={this.onUsernameChange} type="text" name="username" placeholder="Username" value={this.props.user.Username} />
+              <input type="password" name="password" placeholder="Password"/>
               <input type="submit" value="Login" />
             </form>
         }
@@ -45,8 +45,10 @@ module.exports = React.createClass({
   },
   onLoginResponse: function(json) {
     if(json.error) {
-      console.log(json);
+      console.log(json)
+      this.props.do("addMessage",{type: "error", content: json.errorString})
     } else {
+      this.props.do("addMessage",{type: "success", content: "Action successful: "+json.success})
       this.props.do("onLogin",json.user)
     }
   },

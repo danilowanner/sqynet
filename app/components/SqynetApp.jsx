@@ -3,17 +3,20 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var MenuBar = require('./MenuBar.jsx');
 var Module = require('./Module.jsx');
+var Message = require('./Message.jsx');
 
 /* Module, export component */
 module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      user: {ID: null, Username: "Username"},
+      user: {ID: null, Username: ""},
       modules: [
         {key: 1, type: "welcome"}
       ],
-      lastModuleKey: 1
+      lastModuleKey: 1,
+      messages: [],
+      lastMessageKey: 0,
     };
   },
 
@@ -21,6 +24,15 @@ module.exports = React.createClass({
     return (
       <div className="SqynetApp">
         <MenuBar user={this.state.user} do={this.do}/>
+        <section className="messages">
+          <ReactCSSTransitionGroup transitionName="slideInOut">
+          {
+            this.state.messages.map((message, index) =>
+              <Message type={message.type} content={message.content} do={this.do} index={index} messageKey={message.key} key={message.key} />
+            )
+          }
+          </ReactCSSTransitionGroup>
+        </section>
         <section className="modules">
           <ReactCSSTransitionGroup transitionName="slideInOut">
           {
@@ -40,12 +52,14 @@ module.exports = React.createClass({
     switch (what) {
       case "addModule": this.addModule(argument); break;
       case "removeModule": this.removeModule(argument); break;
-      case "getZoneTest": this.getZoneTest(argument); break;
-      case "getAccountTest": this.getAccountTest(argument); break;
+      case "addMessage": this.addMessage(argument); break;
+      case "removeMessage": this.removeMessage(argument); break;
       case "onLogin": this.onLogin(argument); break;
       case "onRegister": this.onRegister(argument); break;
       case "onUsernameChange": this.onUsernameChange(argument); break;
       case "focusLogin": this.focusLogin(argument); break;
+      case "getZoneTest": this.getZoneTest(argument); break;
+      case "getAccountTest": this.getAccountTest(argument); break;
     }
   },
   focusLogin: function() {
@@ -76,6 +90,18 @@ module.exports = React.createClass({
     modules.splice(index, 1);
     this.setState({modules: modules} )
   },
+  addMessage: function(message) {
+    var messages = this.state.messages
+    var key = this.state.lastMessageKey+1
+    messages.push({key: key, type: message.type, content: message.content})
+    this.setState({messages: messages, lastMessageKey: key} )
+  },
+  removeMessage: function(index) {
+    var messages = this.state.messages;
+    messages.splice(index, 1);
+    this.setState({messages: messages} )
+  },
+
   getZoneTest: function() {
     helpers.getAPI('getZone')
       .then(function(json) {

@@ -9,9 +9,6 @@ module.exports = React.createClass({
       <div className="MenuBar">
         <h1>sQynet<sup>beta</sup></h1>
         <Navigation />
-        {
-          //console.log(this.props.account)
-        }
         <Account user={this.props.user} do={this.props.do} />
       </div>
     );
