@@ -236,10 +236,16 @@ input::placeholder {
   text-transform: uppercase;
   letter-spacing: 0.15em;
 }
+.Module p,
+.Module ul,
+.Module table {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 .Module p {
   padding: 0 1em 0 1em;
 }
-/* MModule.jsx Component – addmodule */
+/* Module.jsx – addmodule */
 .Module.addmodule .ContentAddModule {
   background-image: url(/assets/sqynet_addModule.svg);
   background-size: 2em 2em;
@@ -270,6 +276,11 @@ input::placeholder {
 .Module.addmodule > div:hover ul {
   display: block;
 }
+/* Module.jsx – zones */
+.Module.zones {
+  max-width: 100%;
+}
+
 
 /* Message.jsx Component */
 .Message {
