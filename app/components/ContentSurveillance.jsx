@@ -1,4 +1,5 @@
-var React = require('react')
+var React = require('react/addons');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var FormField = require('./FormField.jsx')
 
 var helpers = require('../helpers.js')
@@ -18,7 +19,7 @@ module.exports = React.createClass({
 
   render: function () {
     var list = this.state.loading ? <p>loading</p> :
-      <div>
+      <div key="list">
         <table>
           <tr>
             <th>Latitude</th>
@@ -35,11 +36,15 @@ module.exports = React.createClass({
             )
           }
         </table>
+        {
+          this.state.surveillanceAreas.length==0 ?
+            <p>You have no surveillance areas yet.</p> : ""
+        }
         <p><input type="button" onClick={this.toggleShowList} value="Add new surveillance area" /></p>
       </div>
 
     var form =
-      <div>
+      <div key="form">
         <form onSubmit={this.handleSubmit} ref="form">
           <FormField name="latitude" label="Latitude (North/South)" type="number" value={0} />
           <FormField name="longitude" label="Longitude (East/West)" type="number" value={0} />
@@ -55,7 +60,9 @@ module.exports = React.createClass({
 
     return (
       <div className="Content ContentSurveillance">
-        { this.state.showList ? list : form }
+        <ReactCSSTransitionGroup transitionName="swap">
+          { this.state.showList ? list : form }
+        </ReactCSSTransitionGroup>
       </div>
     );
   },
