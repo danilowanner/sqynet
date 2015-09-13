@@ -1,5 +1,6 @@
 var React = require('react/addons');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var cookie = require('react-cookie');
 
 var helpers = require('../helpers.js');
 
@@ -11,12 +12,14 @@ var Message = require('./Message.jsx');
 module.exports = React.createClass({
 
   getInitialState: function() {
+    var modules = cookie.load('hideWelcome')
+      ? [ ]
+      : [ {key: 1, type: "welcome"} ];
+
     return {
       user: {ID: null, Username: ""},
       loginFocus: false,
-      modules: [
-        {key: 1, type: "welcome"}
-      ],
+      modules: modules,
       lastModuleKey: 1,
       messages: [],
       lastMessageKey: 0,
@@ -112,6 +115,9 @@ module.exports = React.createClass({
   },
   removeModule: function(index) {
     var modules = this.state.modules;
+    // when hiding welcome message, save in cookie to disable showing in future
+    if(modules[index].type=="welcome") cookie.save('hideWelcome', true);
+    // remove module
     modules.splice(index, 1);
     this.setState({modules: modules} )
   },
