@@ -8,9 +8,12 @@ module.exports = React.createClass({
     return {
     };
   },
-
+  componentDidUpdate: function() {
+    var loginFocus = this.props.loginFocus
+    if(!this.props.user.ID && loginFocus) React.findDOMNode(this.refs.usernameInput).focus()
+  },
   render: function () {
-    var user = this.props.user;
+    var user = this.props.user
 
     return (
       <div className="Account">
@@ -22,7 +25,7 @@ module.exports = React.createClass({
             </div>
           :
             <form onSubmit={this.handleSubmit} ref="loginform">
-              <input onChange={this.onUsernameChange} type="text" name="username" placeholder="Username" value={this.props.user.Username} />
+              <input onChange={this.onUsernameChange} type="text" name="username" placeholder="Username" value={this.props.user.Username} ref="usernameInput" />
               <input type="password" name="password" placeholder="Password"/>
               <input type="submit" value="Login" />
             </form>

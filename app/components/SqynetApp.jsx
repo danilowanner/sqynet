@@ -13,6 +13,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       user: {ID: null, Username: ""},
+      loginFocus: false,
       modules: [
         {key: 1, type: "welcome"}
       ],
@@ -28,7 +29,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="SqynetApp">
-        <MenuBar user={this.state.user} do={this.do}/>
+        <MenuBar user={this.state.user} loginFocus={this.state.loginFocus} do={this.do}/>
         <section className="messages">
           <ReactCSSTransitionGroup transitionName="slideInOut">
           {
@@ -46,7 +47,7 @@ module.exports = React.createClass({
             )
           }
           </ReactCSSTransitionGroup>
-          <Module type="addmodule" do={this.do} />
+          <Module type="addmodule" do={this.do}/>
         </section>
       </div>
     );
@@ -79,7 +80,10 @@ module.exports = React.createClass({
     }
   },
   focusLogin: function() {
-    // TODO
+    // Set loginFocus to true for a short period of time
+    // to trigger focus in Account.jsx
+    setTimeout(function(){ this.setState({loginFocus: false}) }, 1000)
+    this.setState({loginFocus: true})
   },
   onUsernameChange: function(username) {
     var user = this.state.user;
@@ -89,7 +93,8 @@ module.exports = React.createClass({
   onRegister: function(username) {
     console.log("onRegister "+username);
     if(this.state.user.ID==null) {
-      this.setState({user: {ID: null, Username: username}});
+      this.setState({user: {ID: null, Username: username}})
+      this.focusLogin()
     }
   },
   onLogin: function(user) {

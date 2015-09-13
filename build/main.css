@@ -359,7 +359,6 @@ input:-webkit-autofill {
   max-width: 0;
 }
 
-
 /* swap CSS Transition */
 .swap-enter {
   opacity: 0.01;

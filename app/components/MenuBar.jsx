@@ -9,7 +9,7 @@ module.exports = React.createClass({
       <div className="MenuBar">
         <h1>sQynet<sup>beta</sup></h1>
         <Navigation />
-        <Account user={this.props.user} do={this.props.do} />
+        <Account user={this.props.user} loginFocus={this.props.loginFocus} do={this.props.do} />
       </div>
     );
   }
