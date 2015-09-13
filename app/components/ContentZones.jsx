@@ -38,28 +38,30 @@ module.exports = React.createClass({
   },
   renderList: function () {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Region</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            this.state.zones.map((zone, index) =>
-              <tr key={zone.ID}>
-                <td>{zone.ID}</td>
-                <td>{zone.ZoneName}</td>
-                <td>{zone.RegionName}</td>
-                <td>{zone.CountryName}</td>
-              </tr>
-            )
-          }
-        </tbody>
-      </table>
+      <div className="table" key="list" >
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Region</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.zones.map((zone, index) =>
+                <tr key={zone.ID}>
+                  <td>{zone.ID}</td>
+                  <td>{zone.ZoneName}</td>
+                  <td>{zone.RegionName}</td>
+                  <td>{zone.CountryName}</td>
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
+      </div>
     );
   },
 

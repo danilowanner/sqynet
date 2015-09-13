@@ -278,7 +278,12 @@ input::placeholder {
 }
 /* Module.jsx – zones */
 .Module.zones {
+  max-width: calc(100% - 1em);
+}
+.Module.zones .table {
   max-width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 
@@ -460,7 +465,7 @@ input::placeholder {
   /* Module.jsx*/
   /* adapt Module max width to fill screen */
   .Module {
-    max-width: 100%;
+    max-width: calc(100% - 1em);
   }
   .Module .index,
   .Module .close {
