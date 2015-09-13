@@ -49,6 +49,7 @@ module.exports = React.createClass({
           </ReactCSSTransitionGroup>
           <Module type="addmodule" do={this.do}/>
         </section>
+        <div className="background"></div>
       </div>
     );
   },

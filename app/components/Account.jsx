@@ -19,12 +19,12 @@ module.exports = React.createClass({
       <div className="Account">
         {
           user.ID ?
-            <div>
+            <div className="loggedin">
               <h2>Hello {user.Username}!</h2>
               <input onClick={this.apiLogout} type="button" value="Logout" />
             </div>
           :
-            <form onSubmit={this.handleSubmit} ref="loginform">
+            <form onSubmit={this.handleSubmit} ref="loginform" className="loginform">
               <input onChange={this.onUsernameChange} type="text" name="username" placeholder="Username" value={this.props.user.Username} ref="usernameInput" />
               <input type="password" name="password" placeholder="Password"/>
               <input type="submit" value="Login" />

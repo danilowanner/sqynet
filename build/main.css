@@ -6,10 +6,6 @@ html, body {
 }
 body {
   background-color: #444;
-  background-image: url('/assets/earth-blurry.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
   color: #fff;
   font-family: 'Work Sans', sans-serif;
   font-size: 17px;
@@ -111,33 +107,43 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 100px rgba(40,165,132,1) inset !important;
   -webkit-text-fill-color: white !important;
 }
+input::placeholder {
+  color: rgba(50,255,132,0.6);
+}
 
-/* SqynetApp Component */
+/* SqynetApp.jsx Component */
 .SqynetApp {
-  display: flex;
-  flex-flow: column;
   height: 100%;
   width: 100%;
 }
 .SqynetApp .MenuBar {
-  flex: 0 0 2em;
+  height: 2em;
 }
 .SqynetApp .modules {
   padding: 1em 0.5em;
 }
-.SqynetApp .modules::after {
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
+.SqynetApp .modules:before,
+.SqynetApp .modules:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+.SqynetApp .modules:after {
   clear: both;
-  height: 0;
 }
-.SqynetApp .messages {
+.SqynetApp .background {
+  background-image: url('/assets/earth-blurry.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-attachment: scroll;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
 }
 
 
-/* MenuBar Component */
+/* MenuBar.jsx Component */
 .MenuBar {
   align-items: center;
   background: linear-gradient(135deg, rgba(0,142,125,0.60) 0%,rgba(0,185,82,0.4) 50%,rgba(0,142,125,0.60) 100%);
@@ -167,7 +173,8 @@ input:-webkit-autofill {
 }
 .MenuBar .Account h2{
   display: inline-block;
-  margin-right: 0.6em;
+  font-size: 1.28em;
+  margin: 0 0.6em 0 0;
 }
 
 /* Navigation.jsx Component */
@@ -191,7 +198,7 @@ input:-webkit-autofill {
   border: 1px solid rgba(50,255,132,0.3);
   display: inline-block;
   margin: 1em 0.5em;
-  max-width: calc( 33.33% - 1em );
+  max-width: 26em;
   position: relative;
   text-shadow: 1px 1px 4px #046;
   vertical-align: top;
@@ -266,22 +273,23 @@ input:-webkit-autofill {
 
 /* Message.jsx Component */
 .Message {
-  background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
-  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(0,142,125,0.60) 0%,rgba(0,185,82,0.4) 50%,rgba(0,142,125,0.60) 100%);
   border-bottom: 1px solid rgba(50,255,132,0.3);
+  box-sizing: border-box;
+  box-shadow: 1px 1px 8px rgba(0,40,70,0.5);
   flex: 0 0 1em;
   padding: 0.4em 1em;
   position: relative;
 }
 .Message.error {
-  background: linear-gradient(135deg, rgba(250,50,0,0.3) 0%,rgba(250,120,20,0.2) 50%,rgba(250,50,0,0.3) 100%);
+  background: linear-gradient(135deg, rgba(250,50,0,0.6) 0%,rgba(200,100,0,0.5) 50%,rgba(250,50,0,0.6) 100%);
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255,160,0,0.3);
   flex: 0 0 1em;
 }
 .Message .time {
   position: absolute;
-  right: 1em;
+  right: 1em; bottom: 0.4em;
   font-size: 0.8em;
   color: rgba(50,255,132,0.6)
 }
@@ -385,4 +393,73 @@ input:-webkit-autofill {
   max-height: 0;
   transition: all .4s ease;
   transform: translateY(-5em);
+}
+
+/* Mobile and Tablet styles */
+@media (max-width: 659px) {
+  body {
+    font-size: 15px;
+  }
+
+  /* SqynetApp.jsx Component */
+  .SqynetApp .MenuBar {
+    flex: 0 0 auto;
+    height: auto;
+  }
+  /* make space at bottom for absolute positioned menu Module */
+  .SqynetApp .modules {
+    padding-bottom: 6em;
+    padding-top: 2em;
+    position: relative;
+  }
+  .SqynetApp .messages {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  /* MenuBar.jsx Component */
+  .MenuBar {
+    display: block;
+  }
+  .MenuBar h1 {
+    border-bottom: 1px solid rgba(50,255,132,0.3);
+    margin-bottom: 0.4em;
+    padding-bottom: 0.4em;
+    text-align: center;
+  }
+  .MenuBar .Account {
+    width: auto;
+  }
+  .MenuBar .Account input{
+    display: block;
+    width: 100%;
+    margin: 0 0 0.5em 0;
+  }
+  .MenuBar .Account .loggedin input{
+    display: inline-block;
+    width: auto;
+  }
+  .MenuBar .Account .loggedin {
+    text-align: center;
+  }
+
+  /* Module.jsx*/
+  /* adapt Module max width to fill screen */
+  .Module {
+    max-width: 100%;
+  }
+  .Module .index,
+  .Module .close {
+    font-size: 0.8em;
+  }
+
+  /* Module.jsx Component – addmodule */
+  .Module.addmodule {
+    position: absolute;
+    bottom: 0;
+    right: 0.5em;
+  }
 }

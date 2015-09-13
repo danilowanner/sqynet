@@ -53,7 +53,7 @@ module.exports = React.createClass({
           <p>
             This will add a suveilance zone (circular) around the provided coordinates (lat/long). You will be notified of all zone changes in this area.
           </p>
-          <p><input type="submit" value="Add surveillance zone" /></p>
+          <p><input type="submit" value="Add surveillance area" /></p>
           <p><input type="button" onClick={this.toggleShowList} value="Cancel" /></p>
         </form>
       </div>

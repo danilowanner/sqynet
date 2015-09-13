@@ -1,8 +1,21 @@
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 
+var host = "192.168.0.19";
+
 module.exports = {
-  entry: ['webpack-dev-server/client?http://localhost:8080', 'webpack/hot/only-dev-server', './app/main.jsx'],
+  devtool: "eval",
+  devServer: {
+    hot: true,
+    host: host,
+    contentBase: 'build',
+    stats: { colors: true }
+  },
+  entry: [
+    './app/main.jsx',
+    'webpack/hot/only-dev-server',
+    'webpack-dev-server/client?http://'+host+':8080'
+  ],
   output: {
     path: './build',
     filename: 'bundle.js'
@@ -17,11 +30,5 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
-  devtool: "eval",
-  devServer: {
-    hot: true,
-    contentBase: 'build',
-    stats: { colors: true }
-  },
   postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ]
 };
