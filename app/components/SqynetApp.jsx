@@ -14,7 +14,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     var modules = cookie.load('hideWelcome')
       ? [ ]
-      : [ {key: 1, type: "welcome"} ];
+      : [ {key: 1, type: "welcome", data: undefined} ];
 
     return {
       user: {ID: null, Username: ""},
@@ -46,7 +46,7 @@ module.exports = React.createClass({
           <ReactCSSTransitionGroup transitionName="slideInOut">
           {
             this.state.modules.map((module, index) =>
-              <Module type={module.type} do={this.do} index={index} moduleKey={module.key} key={module.key} />
+              <Module type={module.type} data={module.data} do={this.do} index={index} moduleKey={module.key} key={module.key} />
             )
           }
           </ReactCSSTransitionGroup>
@@ -107,10 +107,12 @@ module.exports = React.createClass({
   onLogout: function() {
     this.setState({user: {ID: null, Username: ""}});
   },
-  addModule: function(type) {
+  addModule: function(args) {
+    var type = args.type
+    var data = args.data
     var modules = this.state.modules
-    var key = this.state.lastModuleKey+1;
-    modules.push({key: key, type: type})
+    var key = this.state.lastModuleKey+1
+    modules.push({key: key, type: type, data: data})
     this.setState({modules: modules, lastModuleKey: key} )
   },
   removeModule: function(index) {

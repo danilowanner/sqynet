@@ -111,6 +111,36 @@ input::placeholder {
   color: rgba(50,255,132,0.6);
 }
 
+/* faction colors */
+.faceless{
+  background-color: rgba(80,10,80,0.5);
+}
+.legion{
+  background-color: rgba(130,50,50,0.5);
+}
+.swarm{
+  background-color: rgba(60,110,0,0.5);
+}
+
+/* icons */
+.icon {
+  background-position: center center;
+  background-size: cover;
+  background-attachment: scroll;
+  width: 2.3em;
+  height: 2.3em;
+  margin-top: 0.3em;
+}
+.icon.satellite-icon {
+  background-image: url('/assets/sqynet_satellite.svg');
+}
+.icon.globe-icon {
+  background-image: url('/assets/sqynet_globe.svg');
+}
+.icon.settings-icon {
+  background-image: url('/assets/sqynet_settings.svg');
+}
+
 /* SqynetApp.jsx Component */
 .SqynetApp {
   height: 100%;
@@ -322,6 +352,36 @@ input::placeholder {
   display: block;
   width: 100%;
 }
+.Content .icon-and-text {
+  display: flex;
+  padding: 0 1em;
+  margin: 1em 0;
+}
+.Content .icon-and-text .icon{
+  flex: 2em;
+}
+.Content .icon-and-text p{
+  margin: 0;
+}
+
+/* ContentZones.jsx Component*/
+.ContentZones table tr {
+  cursor: pointer;
+}
+
+/* ContentZones.jsx Component*/
+.ContentZone ul.counts {
+  list-style: none;
+  padding: 0;
+}
+.ContentZone ul.counts li {
+  margin-bottom: 2px;
+  padding: 0.2em 1em;
+}
+.ContentZone ul.counts li>span:first-child{
+  display: inline-block;
+  width: 6em;
+}
 
 /* slideInOut CSS Transition */
 .slideInOut-enter {
@@ -410,6 +470,8 @@ input::placeholder {
   transition: all .4s ease;
   transform: translateY(-5em);
 }
+
+
 
 /* Mobile and Tablet styles */
 @media (max-width: 659px) {

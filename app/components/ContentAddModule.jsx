@@ -17,9 +17,9 @@ module.exports = React.createClass({
 
     var menu = this.state.open ?
       <ul>
-        <li onClick={this.props.do.bind(null,"addModule","registration")}>Registration</li>
-        <li onClick={this.props.do.bind(null,"addModule","zones")}>Zones</li>
-        <li onClick={this.props.do.bind(null,"addModule","surveillance")}>Surveillance</li>
+        <li onClick={this.props.do.bind(null,"addModule",{type: "registration"})}>Registration</li>
+        <li onClick={this.props.do.bind(null,"addModule",{type: "zones"})}>Zones</li>
+        <li onClick={this.props.do.bind(null,"addModule",{type: "surveillance"})}>Surveillance</li>
       </ul>
       : "";
 

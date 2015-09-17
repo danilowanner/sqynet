@@ -53,7 +53,7 @@ module.exports = React.createClass({
               this.state.zones.map((zone, index) =>
                 <tr key={zone.ID}>
                   <td>{zone.ID}</td>
-                  <td>{zone.ZoneName}</td>
+                  <td><a onClick={this.onClickZone.bind(null, zone.ID)}>{zone.ZoneName}</a></td>
                   <td>{zone.RegionName}</td>
                   <td>{zone.CountryName}</td>
                 </tr>
@@ -90,6 +90,9 @@ module.exports = React.createClass({
   },
   onParsingFail: function(ex) {
     console.log('JSON parsing failed', ex)
-  }
+  },
+  onClickZone: function(zoneid) {
+    this.props.do("addModule",{type: "zone", data: {zoneid: zoneid}})
+  },
 
 });
