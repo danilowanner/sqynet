@@ -4,6 +4,7 @@ var ContentRegistrationForm = require('./ContentRegistrationForm.jsx');
 var ContentAddModule = require('./ContentAddModule.jsx');
 var ContentZones = require('./ContentZones.jsx');
 var ContentZone = require('./ContentZone.jsx');
+var ContentRegion = require('./ContentRegion.jsx');
 var ContentSurveillance = require('./ContentSurveillance.jsx');
 
 module.exports = React.createClass({
@@ -37,12 +38,19 @@ module.exports = React.createClass({
         break;
       case "zone":
         if(!(this.props.data && this.props.data.zoneid)) {
-          var title = <h1>Error</h1>
-          var content = <p>No zoneid specified</p>
+          var title = <h1>Error</h1>, content = <p>No zoneid specified</p>
           break;
         }
         var title = <h1>Zone {this.props.data.zoneid}</h1>
         var content = <ContentZone do={this.props.do} zoneid={this.props.data.zoneid}/>
+        break;
+      case "region":
+        if(!(this.props.data && this.props.data.regionid)) {
+          var title = <h1>Error</h1>, content = <p>No regionid specified</p>
+          break;
+        }
+        var title = <h1>Region {this.props.data.regionid}</h1>
+        var content = <ContentRegion do={this.props.do} regionid={this.props.data.regionid}/>
         break;
       default:
         var title = <h1>{ this.props.type }</h1>;

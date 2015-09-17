@@ -54,7 +54,7 @@ module.exports = React.createClass({
                 <tr key={zone.ID}>
                   <td>{zone.ID}</td>
                   <td><a onClick={this.onClickZone.bind(null, zone.ID)}>{zone.ZoneName}</a></td>
-                  <td>{zone.RegionName}</td>
+                  <td><a onClick={this.onClickRegion.bind(null, zone.RegionID)}>{zone.RegionName}</a></td>
                   <td>{zone.CountryName}</td>
                 </tr>
               )
@@ -93,6 +93,9 @@ module.exports = React.createClass({
   },
   onClickZone: function(zoneid) {
     this.props.do("addModule",{type: "zone", data: {zoneid: zoneid}})
+  },
+  onClickRegion: function(regionid) {
+    this.props.do("addModule",{type: "region", data: {regionid: regionid}})
   },
 
 });
