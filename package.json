@@ -20,7 +20,8 @@
     "webpack-dev-server": "^1.10.1"
   },
   "scripts": {
-    "dev": "webpack-dev-server --progress"
+    "dev": "webpack-dev-server --progress --config=./webpack.hot.config.js",
+    "build": "webpack --progress"
   },
   "author": "Danilo Wanner",
   "license": "MIT"
