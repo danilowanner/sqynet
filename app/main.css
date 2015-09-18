@@ -123,23 +123,14 @@ input::placeholder {
 }
 
 /* icons */
-.icon {
-  background-position: center center;
-  background-size: cover;
-  background-attachment: scroll;
+iframe.icon {
+  border: none;
+  display: inline-block;
   width: 2.3em;
   height: 2.3em;
   margin-top: 0.3em;
 }
-.icon.satellite-icon {
-  background-image: url('/assets/sqynet_satellite.svg');
-}
-.icon.globe-icon {
-  background-image: url('/assets/sqynet_globe.svg');
-}
-.icon.settings-icon {
-  background-image: url('/assets/sqynet_settings.svg');
-}
+
 
 /* SqynetApp.jsx Component */
 .SqynetApp {
@@ -226,7 +217,8 @@ input::placeholder {
   box-sizing: border-box;
   box-shadow: 1px 1px 10px rgba(50,252,215,0.3);
   border: 1px solid rgba(50,255,132,0.3);
-  display: inline-block;
+  display: block;
+  float: left;
   margin: 1em 0.5em;
   max-width: 26em;
   position: relative;

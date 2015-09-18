@@ -29,7 +29,9 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="icon-and-text">
-          <div className={ zone.SurveillanceID ? "icon satellite-icon" : "icon globe-icon" }></div>
+          <div class="icon">
+            <iframe className="icon" src={ zone.SurveillanceID ? "assets/sqynet_satellite.svg" : "assets/sqynet_globe.svg" }></iframe>
+          </div>
           <p>
             <strong>{zone.ZoneName}</strong><br/>
             <span>{zone.RegionName}</span><br/>

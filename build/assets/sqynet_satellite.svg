@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">
 <g>
 	<rect x="9.837" y="11.251" transform="matrix(0.7071 0.7071 -0.7071 0.7071 21.1807 -12.6302)" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="31.997" height="16"/>
 	<rect x="60.747" y="62.164" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 81.4059 174.0465)" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="32.001" height="16"/>
@@ -16,10 +15,8 @@
 		M6.383,69.821c-5.469,5.467-5.469,14.331,0,19.799c5.465,5.467,14.33,5.467,19.797,0"/>
 	<path class="pulse" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 		M13.938,73.821c-2.344,2.343-2.344,6.142,0,8.485c2.344,2.342,6.141,2.342,8.484,0"/>
-
-		<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="37.15" y1="30.568" x2="42.809" y2="36.222"/>
-
-		<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="59.777" y1="53.194" x2="65.434" y2="58.852"/>
+	<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="37.15" y1="30.568" x2="42.809" y2="36.222"/>
+	<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="59.777" y1="53.194" x2="65.434" y2="58.852"/>
 	<g>
 		<path fill="#FFFFFF" d="M79.578,12.425c-1.025,0-2.049,0.391-2.83,1.171c-1.561,1.56-1.561,4.096,0,5.656
 			c0.781,0.78,1.805,1.171,2.83,1.171c1.023,0,2.047-0.391,2.828-1.171c1.561-1.561,1.561-4.097,0-5.656
@@ -27,11 +24,6 @@
 	</g>
 	<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="71.092" y1="24.91" x2="76.754" y2="19.25"/>
 	<style>
-	@keyframes pulse {
-		0% { opacity: 1; }
-		50% { opacity: 0; }
-		100% { opacity: 1; }
-	}
 	.pulse {
 		-webkit-animation: pulse 2s infinite;
 		        animation: pulse 2s infinite;
@@ -39,6 +31,16 @@
 	.delay {
 		-webkit-animation-delay: 0.5s;
 		        animation-delay: 0.5s;
+	}
+	@-webkit-keyframes pulse {
+		0% { opacity: 1; }
+		50% { opacity: 0; }
+		100% { opacity: 1; }
+	}
+	@keyframes pulse {
+		0% { opacity: 1; }
+		50% { opacity: 0; }
+		100% { opacity: 1; }
 	}
 	</style>
 </g>

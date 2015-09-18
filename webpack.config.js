@@ -1,8 +1,6 @@
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 
-var host = "localhost";
-
 module.exports = {
   devtool: "source-map",
   entry: [

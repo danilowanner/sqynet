@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 
-var host = "localhost";
+var host = "192.168.192.58";
 
 module.exports = {
   devtool: "eval",
