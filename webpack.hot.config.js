@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 
-var host = "192.168.192.58";
+var host = "localhost";
 
 module.exports = {
   devtool: "eval",
@@ -22,7 +22,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx$/, loaders: ['react-hot','jsx-loader?harmony'] },
+      { test: /\.jsx$/, loaders: ['react-hot','jsx?harmony'] },
+      { test: /autoresponsive-react.*\.js$/, loaders: ['babel'] },
       { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' }
     ]
   },

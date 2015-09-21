@@ -22,13 +22,13 @@ module.exports = React.createClass({
 
   /* Custom Methods */
   onClickRegister: function() {
-    this.props.do('addModule','registration')
+    this.props.do('addModule',{type: "registration"})
   },
   onClickLogin: function() {
     this.props.do('focusLogin')
   },
   onClickSurveillance: function() {
-    this.props.do('addModule','surveillance')
+    this.props.do('addModule',{type: "surveillance"})
   }
 
 });

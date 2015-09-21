@@ -4,6 +4,7 @@ var cookie = require('react-cookie');
 
 var helpers = require('../helpers.js');
 
+var AutoResponsive = require('autoresponsive-react');
 var MenuBar = require('./MenuBar.jsx');
 var Module = require('./Module.jsx');
 var Message = require('./Message.jsx');
@@ -12,10 +13,7 @@ var Message = require('./Message.jsx');
 module.exports = React.createClass({
 
   getInitialState: function() {
-    var modules = cookie.load('hideWelcome')
-      ? [ ]
-      : [ {key: 1, type: "welcome", data: undefined} ];
-
+    var modules = this.getInitialModules();
     return {
       user: {ID: null, Username: ""},
       loginFocus: false,
@@ -23,10 +21,36 @@ module.exports = React.createClass({
       lastModuleKey: 1,
       messages: [],
       lastMessageKey: 0,
+      autoresponsiveProps: this.getAutoresponsiveProps(),
+      gridHeight: 10
     };
+  },
+  getAutoresponsiveProps: function() {
+    var em = document.body.clientWidth > 659 ? 17 : 15 /* mobile breakpoint at 659px */
+    return {
+      containerWidth: document.body.clientWidth-1*em, /* 1em border-width */
+      gridWidth: em, /* 1em grid-width */
+      itemClassName: 'grid-item',
+      itemMargin: 0,
+      transitionDuration: '.4',
+      transitionTimingFunction: 'ease'
+    }
+  },
+  getInitialModules: function() {
+    if( cookie.load('hideWelcome') ) {
+      return [ this.createModule({type: "welcome"}) ]
+    }
+    else {
+      return [ ]
+    }
   },
   componentDidMount: function() {
     this.apiGetAccount()
+
+    window.addEventListener('resize', this.onResize, false);
+  },
+  onResize: function() {
+    this.setState({autoresponsiveProps: this.getAutoresponsiveProps()});
   },
 
   render: function () {
@@ -42,19 +66,31 @@ module.exports = React.createClass({
           }
           </ReactCSSTransitionGroup>
         </section>
-        <section className="modules">
-          <ReactCSSTransitionGroup transitionName="slideInOut">
-          {
-            this.state.modules.map((module, index) =>
-              <Module type={module.type} data={module.data} do={this.do} index={index} moduleKey={module.key} key={module.key} />
-            )
-          }
-          </ReactCSSTransitionGroup>
-          <Module type="addmodule" do={this.do}/>
-        </section>
+        <AutoResponsive {...this.state.autoresponsiveProps} >
+          { this.renderModules() }
+        </AutoResponsive>
+        <Module type="addmodule" do={this.do} />
         <div className="background"></div>
       </div>
     );
+  },
+  renderModules: function() {
+    return this.state.modules.map((module, i) => {
+        // set width and height, limit width to containerWidth
+        var styles = {
+              width: Math.min(module.width*this.state.autoresponsiveProps.gridWidth, this.state.autoresponsiveProps.containerWidth),
+              height: module.height*this.state.gridHeight
+            }
+        return (
+          <div className="grid-item" key={module.key} style={styles}>
+            <div className="index">00.0{i}.00{module.key}</div>
+            <div className="close" onClick={this.removeModule.bind(null,i)}>x<div> close</div></div>
+              <ReactCSSTransitionGroup transitionName="slideInOut" transitionAppear={true}>
+                <Module do={this.do} type={module.type} key={module.key} data={module.data} index={i} onHeightChange={this.onModuleHeightChange}/>
+              </ReactCSSTransitionGroup>
+          </div>
+        )
+      })
   },
 
   /* Custom Methods */
@@ -86,7 +122,7 @@ module.exports = React.createClass({
   focusLogin: function() {
     // Set loginFocus to true for a short period of time
     // to trigger focus in Account.jsx
-    setTimeout(function(){ this.setState({loginFocus: false}) }, 1000)
+    setTimeout(() =>{ this.setState({loginFocus: false}) }, 1000)
     this.setState({loginFocus: true})
   },
   onUsernameChange: function(username) {
@@ -108,12 +144,24 @@ module.exports = React.createClass({
     this.setState({user: {ID: null, Username: ""}});
   },
   addModule: function(args) {
+    var modules = this.state.modules;
+    // create and add new module to array
+    var module = this.createModule(args)
+    modules.push(module)
+    // update state with new modules array
+    this.setState({modules: modules, lastModuleKey: module.key} )
+  },
+  createModule: function(args) {
     var type = args.type
     var data = args.data
-    var modules = this.state.modules
-    var key = this.state.lastModuleKey+1
-    modules.push({key: key, type: type, data: data})
-    this.setState({modules: modules, lastModuleKey: key} )
+    var key = this.state ? this.state.lastModuleKey+1 : 0;
+    return {
+      key: key,
+      type: type,
+      width: type=="zones" ? 30 : 20,
+      height: 10,
+      data: data
+    }
   },
   removeModule: function(index) {
     var modules = this.state.modules;
@@ -136,6 +184,12 @@ module.exports = React.createClass({
   },
   onParsingFail: function(ex) {
     console.log('JSON parsing failed', ex)
+  },
+  onModuleHeightChange: function(index,height) {
+    var modules = this.state.modules;
+    // update style of this module to match height of content, plus bottom margin (30px)
+    modules[index].height = Math.ceil(height/this.state.gridHeight) + 3;
+    this.setState({modules: modules} )
   }
 
 });

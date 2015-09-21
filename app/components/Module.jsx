@@ -1,4 +1,6 @@
 var React = require('react');
+var Resizable = require('react-component-resizable');
+
 var ContentWelcome = require('./ContentWelcome.jsx');
 var ContentRegistrationForm = require('./ContentRegistrationForm.jsx');
 var ContentAddModule = require('./ContentAddModule.jsx');
@@ -11,7 +13,24 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      contentHeight: 0,
     };
+  },
+  componentDidMount: function() {
+    this.updateSize()
+    this.timer = setInterval(this.checkSize,200)
+  },
+  componentWillUnmount: function() {
+    clearInterval(this.timer)
+  },
+  checkSize: function() {
+    var module = React.findDOMNode(this.refs.module)
+    var height = module.offsetHeight
+    if(height != this.state.contentHeight) this.updateSize(height);
+  },
+  updateSize: function(height) {
+    if(this.props.onHeightChange) this.props.onHeightChange(this.props.index, height)
+    this.setState({ contentHeight: height })
   },
 
   render: function () {
@@ -57,14 +76,8 @@ module.exports = React.createClass({
         var content = <p>Module not found</p>;
     }
     return (
-      <div className={ "Module "+this.props.type }>
+      <div className={ "Module "+this.props.type } ref="module" onResize={this.updateSize}>
         { title }
-        <div className="index">00.0{this.props.index}.00{this.props.moduleKey}</div>
-        {
-          this.props.index != undefined ?
-            <div className="close" onClick={this.removeModule}>x<div> close</div></div>
-            : ""
-        }
         { content }
       </div>
     );

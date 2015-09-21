@@ -4,6 +4,8 @@
   "description": "User interface for sqynet, a QONQR game tool by the Swarm faction.",
   "main": "app/main.js",
   "dependencies": {
+    "autoresponsive-react": "^1.1.7",
+    "babel-loader": "^5.3.2",
     "jsx-loader": "^0.13.2",
     "normalize.css": "^3.0.3",
     "react": "^0.13.3",

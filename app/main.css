@@ -134,22 +134,12 @@ iframe.icon {
 
 /* SqynetApp.jsx Component */
 .SqynetApp {
-  height: 100%;
+  min-height: 100%;
+  position: relative;
   width: 100%;
 }
 .SqynetApp .MenuBar {
   height: 2em;
-}
-.SqynetApp .modules {
-  padding: 1em 0.5em;
-}
-.SqynetApp .modules:before,
-.SqynetApp .modules:after {
-  content: " "; /* 1 */
-  display: table; /* 2 */
-}
-.SqynetApp .modules:after {
-  clear: both;
 }
 .SqynetApp .background {
   background-image: url('/assets/earth-blurry.jpg');
@@ -162,7 +152,46 @@ iframe.icon {
   height: 100%;
   z-index: -10;
 }
-
+/* SqynetApp.jsx Component: autoresponsive-container */
+.rc-autoresponsive-container {
+  padding: 1em 0.5em 4em 0.5em;
+}
+.rc-autoresponsive-container:before,
+.rc-autoresponsive-container:after {
+  content: " ";
+  display: table;
+}
+.rc-autoresponsive-container:after {
+  clear: both;
+}
+.rc-autoresponsive-container .grid-item {
+  padding: 1.2em 0 0 0;
+}
+.rc-autoresponsive-container .grid-item .Module{
+  width: calc(100% - 1em);
+  margin-left: 0.5em;
+}
+.grid-item .index,
+.grid-item .close {
+  font-size: 0.7em;
+  position: absolute;
+  top: -1.5em;
+  left: 0;
+  padding: 1em;
+  color: rgba(50,255,132,0.5);
+}
+.grid-item .close {
+  left: auto;
+  right: 0;
+  cursor: pointer;
+}
+.grid-item .close>div {
+  display: none;
+  color: #fff;
+}
+.grid-item .close:hover>div {
+  display: inline;
+}
 
 /* MenuBar.jsx Component */
 .MenuBar {
@@ -212,39 +241,15 @@ iframe.icon {
 }
 
 /* Module.jsx Component */
+.content-container {
+  display: inline-block;
+}
 .Module {
   background: linear-gradient(135deg, rgba(0,142,125,0.60) 0%,rgba(0,185,82,0.4) 50%,rgba(0,142,125,0.60) 100%);
   box-sizing: border-box;
   box-shadow: 1px 1px 10px rgba(50,252,215,0.3);
   border: 1px solid rgba(50,255,132,0.3);
-  display: block;
-  float: left;
-  margin: 1em 0.5em;
-  max-width: 26em;
-  position: relative;
   text-shadow: 1px 1px 4px #046;
-  vertical-align: top;
-}
-.Module .index,
-.Module .close {
-  font-size: 0.6em;
-  position: absolute;
-  top: -3em;
-  left: -1em;
-  padding: 1em;
-  color: rgba(50,255,132,0.5);
-}
-.Module .close {
-  left: auto;
-  right: -1em;
-  cursor: pointer;
-}
-.Module .close>div {
-  display: none;
-  color: #fff;
-}
-.Module .close:hover>div {
-  display: inline;
 }
 .Module h1 {
   background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
@@ -268,6 +273,11 @@ iframe.icon {
   padding: 0 1em 0 1em;
 }
 /* Module.jsx – addmodule */
+.Module.addmodule {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
 .Module.addmodule .ContentAddModule {
   background-image: url(/assets/sqynet_addModule.svg);
   background-size: 2em 2em;
@@ -300,7 +310,7 @@ iframe.icon {
 }
 /* Module.jsx – zones */
 .Module.zones {
-  max-width: calc(100% - 1em);
+
 }
 .Module.zones .table {
   max-width: 100%;
@@ -340,6 +350,9 @@ iframe.icon {
 }
 
 /* Content Components */
+.Content {
+
+}
 .Content input {
   display: block;
   width: 100%;
@@ -376,13 +389,15 @@ iframe.icon {
 }
 
 /* slideInOut CSS Transition */
-.slideInOut-enter {
+.slideInOut-enter,
+.slideInOut-appear {
   opacity: 0.01;
   transform: scale3d(0,0,0);
   transform-origin: 50% 20%;
   filter: blur(50px);
 }
-.slideInOut-enter.slideInOut-enter-active {
+.slideInOut-enter.slideInOut-enter-active,
+.slideInOut-appear.slideInOut-appear-active {
   opacity: 1;
   transform: scale3d(1,1,1);
   transform-origin: 50% 0%;
@@ -517,10 +532,6 @@ iframe.icon {
   }
 
   /* Module.jsx*/
-  /* adapt Module max width to fill screen */
-  .Module {
-    max-width: calc(100% - 1em);
-  }
   .Module .index,
   .Module .close {
     font-size: 0.8em;
