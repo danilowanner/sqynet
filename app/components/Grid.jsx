@@ -28,9 +28,11 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <AutoResponsive {...this.state.autoresponsiveProps} >
-        { this.renderModules() }
-      </AutoResponsive>
+      <div className="Grid">
+        <AutoResponsive {...this.state.autoresponsiveProps} >
+          { this.renderModules() }
+        </AutoResponsive>
+      </div>
     )
   },
   renderModules: function() {
