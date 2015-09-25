@@ -314,14 +314,13 @@ iframe.icon {
 .Module.addmodule > div:hover ul {
   display: block;
 }
-/* Module.jsx – zones */
-.Module.zones {
-
-}
-.Module.zones .table {
-  max-width: 100%;
+.Module .table {
+  width: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+}
+.Module .table table{
+  min-width: 100%;
 }
 
 
@@ -380,7 +379,7 @@ iframe.icon {
   cursor: pointer;
 }
 
-/* ContentZones.jsx Component*/
+/* ContentZone.jsx Component*/
 .ContentZone ul.counts {
   list-style: none;
   padding: 0;
@@ -538,15 +537,13 @@ iframe.icon {
   }
 
   /* Module.jsx*/
-  .Module .index,
-  .Module .close {
-    font-size: 0.8em;
+  .Module .table {
+    max-height: 50vh;
   }
 
-  /* Module.jsx Component – addmodule */
-  .Module.addmodule {
-    position: absolute;
-    bottom: 0;
-    right: 0.5em;
+  .grid-item .index,
+  .grid-item .close {
+    ont-size: 0.95em;
+    font-weight: bold;
   }
 }

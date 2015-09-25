@@ -18,28 +18,40 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var list = this.state.loading ? <p>loading</p> :
+    var list =
       <div key="list">
-        <table>
-          <tr>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Radius</th>
-          </tr>
-          {
-            this.state.surveillanceAreas.map((area, index) =>
-              <tr key={index}>
-                <td>{area.Latitude}</td>
-                <td>{area.Longitude}</td>
-                <td>{area.Radius}</td>
+        <div className="table">
+          <table>
+            <thead>
+              <tr>
+                <th>Lat</th>
+                <th>Long</th>
+                <th>Radius</th>
+                <th>d</th>
               </tr>
-            )
-          }
-        </table>
-        {
-          this.state.surveillanceAreas.length==0 ?
-            <p>You have no surveillance areas yet.</p> : ""
-        }
+            </thead>
+            <tbody>
+              {
+                this.state.surveillanceAreas.map((area, index) =>
+                  <tr key={area.ID}>
+                    <td>{area.Latitude}</td>
+                    <td>{area.Longitude}</td>
+                    <td>{area.Radius}</td>
+                    <td><a onClick={this.apiRemoveArea.bind(null,area.ID)} title="remove">✕</a></td>
+                  </tr>
+                )
+              }
+              {
+                this.state.loading ? <tr key="loading"><td colSpan={4} style={{textAlign: "center"}}>loading</td></tr> : ""
+              }
+              {
+                this.state.surveillanceAreas.length==0 ?
+                  <tr key="empty"><td colSpan={4} style={{textAlign: "center"}}>You have no surveillance areas yet.</td></tr> : ""
+              }
+            </tbody>
+          </table>
+        </div>
+
         <p><input type="button" onClick={this.toggleShowList} value="Add new surveillance area" /></p>
       </div>
 
@@ -72,28 +84,38 @@ module.exports = React.createClass({
     e.preventDefault();
     var form = React.findDOMNode(this.refs.form);
     var formData = new FormData(form);
-    this.apiAddSurveillance(formData)
+    this.apiAddArea(formData)
   },
-  apiAddSurveillance: function(formData) {
+
+  apiRemoveArea: function(id) {
+    helpers.getAPI('removeSurveillance/?id='+id)
+      .then(this.onAddRemoveResponse)
+      .catch(this.onFail)
+  },
+
+  apiAddArea: function(formData) {
     helpers.postAPI('addSurveillance', formData)
-      .then(this.onAddResponse)
-      .catch(this.onParsingFail)
+      .then(this.onAddRemoveResponse)
+      .catch(this.onFail)
   },
-  onAddResponse: function(json) {
+
+  onAddRemoveResponse: function(json) {
     if(json.error) {
       console.log(json)
       this.props.do("addMessage",{type: "error", content: json.errorString})
     } else {
       this.props.do("addMessage",{type: "success", content: "Action successful: "+json.success})
-      this.setState({showList: true})
+      this.setState({showList: true, loading: true})
       this.apiGetSurveillanceAreas()
     }
   },
+
   apiGetSurveillanceAreas: function() {
     helpers.getAPI('getSurveillanceAreas')
       .then(this.onGetResponse)
-      .catch(this.onParsingFail)
+      .catch(this.onFail)
   },
+
   onGetResponse: function(json) {
     if(json.error) {
       console.log(json)
@@ -101,14 +123,15 @@ module.exports = React.createClass({
     } else {
       console.log(json);
       this.setState({loading: false, surveillanceAreas: json.data})
-      this.props.do("addMessage",{type: "success", content: "Action successful: "+json.success})
     }
   },
-  onParsingFail: function(ex) {
-    console.log('JSON parsing failed', ex)
+
+  onFail: function(ex) {
+    console.log('JSON parsing or handling failed', ex)
   },
+
   toggleShowList: function() {
     this.setState({showList: !this.state.showList})
-  }
+  },
 
 });
