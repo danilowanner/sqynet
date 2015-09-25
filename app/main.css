@@ -151,7 +151,6 @@ iframe.icon {
   width: 100%;
   height: 100%;
   z-index: -10;
-  transform: translateZ(-100px);
 }
 
 /* MenuBar.jsx Component */
@@ -203,8 +202,6 @@ iframe.icon {
 
 /* Grid.jsx Component */
 .Grid {
-  perspective: 600px;
-  perspective-origin: 25% 75%;
 }
 .rc-autoresponsive-container {
   padding: 1em 0.5em 4em 0.5em;
@@ -256,11 +253,9 @@ iframe.icon {
   box-shadow: 1px 1px 10px rgba(50,252,215,0.3);
   border: 1px solid rgba(50,255,132,0.3);
   text-shadow: 1px 1px 4px #046;
-  transform-style: preserve-3d;
 }
 .Module a {
   display: inline-block;
-  transform: translateZ(1em);
 }
 .Module h1 {
   background: linear-gradient(135deg, rgba(50,252,215,0.2) 0%,rgba(50,255,132,0.1) 50%,rgba(137,255,251,0.2) 100%);
@@ -273,14 +268,12 @@ iframe.icon {
   padding: 0.5em 1em;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  transform: translateZ(1em);
 }
 .Module p,
 .Module ul,
 .Module table {
   margin-top: 1em;
   margin-bottom: 1em;
-  transform: translateZ(2em);
 }
 .Module p {
   padding: 0 1em 0 1em;

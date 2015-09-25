@@ -19,8 +19,6 @@ module.exports = React.createClass({
   componentDidMount: function() {
     this.updateSize()
     this.timer = setInterval(this.checkSize,200)
-
-    window.addEventListener("mousemove",this.onMouseMove);
   },
   componentWillUnmount: function() {
     clearInterval(this.timer)
@@ -33,17 +31,6 @@ module.exports = React.createClass({
   updateSize: function(height) {
     if(this.props.onHeightChange) this.props.onHeightChange(this.props.index, height)
     this.setState({ contentHeight: height })
-  },
-  onMouseMove: function(e) {
-    var x = 0 - e.clientX + document.body.clientWidth/2
-    var y = 0 - document.body.clientHeight/2 + e.clientY
-    var deg = (Math.abs( x ) + Math.abs( y ))/document.body.clientWidth/document.body.clientHeight * 30000
-    var style = {
-      transform: "rotate3d("+ y +","+ x +",0,"+deg+"deg )",
-      WebkitTransform: "rotate3d("+ y +","+ x +",0,"+deg+"deg )"
-    }
-      console.log(x);
-    this.setState({style: style})
   },
 
   render: function () {
@@ -89,7 +76,7 @@ module.exports = React.createClass({
         var content = <p>Module not found</p>;
     }
     return (
-      <div className={ "Module "+this.props.type } ref="module" style={this.state.style}>
+      <div className={ "Module "+this.props.type } ref="module">
         { title }
         { content }
       </div>
