@@ -7,7 +7,7 @@ var ContentAddModule = require('./ContentAddModule.jsx');
 var ContentZones = require('./ContentZones.jsx');
 var ContentZone = require('./ContentZone.jsx');
 var ContentRegion = require('./ContentRegion.jsx');
-var ContentSurveillance = require('./ContentSurveillance.jsx');
+var ContentAreas = require('./ContentAreas.jsx');
 
 module.exports = React.createClass({
 
@@ -37,7 +37,7 @@ module.exports = React.createClass({
     switch (this.props.type) {
       case "welcome":
         var title = <h1>Welcome to sQynet</h1>;
-        var content = <ContentWelcome do={this.props.do}/>
+        var content = <ContentWelcome do={this.props.do} user={this.props.user}/>
         break;
       case "addmodule":
         var title = "";
@@ -51,9 +51,9 @@ module.exports = React.createClass({
         var title = <h1>Registration</h1>;
         var content = <ContentRegistrationForm do={this.props.do} onRegister={this.removeModule} />
         break;
-      case "surveillance":
-        var title = <h1>Surveillance</h1>;
-        var content = <ContentSurveillance do={this.props.do}/>
+      case "areas":
+        var title = <h1>Surveillance Areas</h1>;
+        var content = <ContentAreas do={this.props.do}/>
         break;
       case "zone":
         if(!(this.props.data && this.props.data.zoneid)) {

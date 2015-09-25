@@ -38,16 +38,24 @@ module.exports = React.createClass({
   renderModules: function() {
     return this.state.modules.map((module, i) => {
         // set width and height, limit width to containerWidth
-        /*var moduleStyle = this.state.moduleStyles[module.key];*/
         var styles = {
               width: Math.min(module.width*this.state.autoresponsiveProps.gridWidth, this.state.autoresponsiveProps.containerWidth),
               height: module.height*this.state.gridHeight
             }
+        var moduleProps = {
+          do: this.props.do,
+          user: this.props.user,
+          type: module.type,
+          key: module.key,
+          data: module.data,
+          index: i,
+          onHeightChange: this.onModuleHeightChange
+        }
         return (
           <div className="grid-item" key={module.key} style={styles}>
             <div className="index">00.0{i}.00{module.key}</div>
             <div className="close" onClick={this.props.do.bind(null,"removeModule",module.key)}>x<div> close</div></div>
-            <Module do={this.props.do} type={module.type} key={module.key} data={module.data} index={i} onHeightChange={this.onModuleHeightChange}/>
+            <Module {...moduleProps} />
           </div>
         )
       })

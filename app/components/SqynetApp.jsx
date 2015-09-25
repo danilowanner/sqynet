@@ -50,10 +50,7 @@ module.exports = React.createClass({
           }
           </ReactCSSTransitionGroup>
         </section>
-        <Grid do={this.do} modules={this.state.modules} />
-        { /*<AutoResponsive {...this.state.autoresponsiveProps} >
-          { this.renderModules() }
-        </AutoResponsive> */ }
+        <Grid do={this.do} modules={this.state.modules} user={this.state.user} />
         <Module type="addmodule" do={this.do} />
         <div className="background"></div>
       </div>
@@ -125,8 +122,6 @@ module.exports = React.createClass({
     return {
       key: key,
       type: type,
-      /*width: type=="zones" ? 30 : 20,
-      height: 10,*/
       data: data
     }
   },

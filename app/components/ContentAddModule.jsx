@@ -19,7 +19,7 @@ module.exports = React.createClass({
       <ul>
         <li onClick={this.props.do.bind(null,"addModule",{type: "registration"})}>Registration</li>
         <li onClick={this.props.do.bind(null,"addModule",{type: "zones"})}>Zones</li>
-        <li onClick={this.props.do.bind(null,"addModule",{type: "surveillance"})}>Surveillance</li>
+        <li onClick={this.props.do.bind(null,"addModule",{type: "areas"})}>Areas</li>
       </ul>
       : "";
 
