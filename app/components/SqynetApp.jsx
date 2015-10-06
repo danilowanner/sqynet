@@ -25,7 +25,7 @@ module.exports = React.createClass({
     };
   },
   getInitialModules: function() {
-    if( cookie.load('hideWelcome') ) {
+    if( !cookie.load('hideWelcome') ) {
       return [ this.createModule({type: "welcome"}) ]
     }
     else {
