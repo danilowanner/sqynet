@@ -17,5 +17,15 @@ module.exports = {
       { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' }
     ]
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),
+    new webpack.NoErrorsPlugin()
+  ],
   postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ]
 };
