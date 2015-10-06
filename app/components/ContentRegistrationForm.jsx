@@ -21,6 +21,11 @@ module.exports = React.createClass({
           <p>
             This e-mail will be used to inform you of detected zone changes, alerts and general information from sQynet.
           </p>
+          <FormField name="latitude" label="Latitude (North/South)" type="number" value={null} />
+          <FormField name="longitude" label="Longitude (East/West)" type="number" value={null} />
+          <p>
+            You will receive notifications for heavy attacks within nano missile reach.
+          </p>
           <p><input type="submit" value="Register" /></p>
         </form>
       </div>

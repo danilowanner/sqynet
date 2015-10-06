@@ -19,9 +19,9 @@ module.exports = React.createClass({
       user: {ID: null, Username: ""},
       loginFocus: false,
       modules: modules,
-      lastModuleKey: 1,
+      lastModuleID: 1,
       messages: [],
-      lastMessageKey: 0,
+      lastMessageID: 0,
     };
   },
   getInitialModules: function() {
@@ -45,7 +45,7 @@ module.exports = React.createClass({
           <ReactCSSTransitionGroup transitionName="slideInOut">
           {
             this.state.messages.map((message, index) =>
-              <Message type={message.type} content={message.content} do={this.do} index={index} messageKey={message.key} key={message.key} />
+              <Message type={message.type} content={message.content} do={this.do} index={index} ID={message.ID} key={message.ID} />
             )
           }
           </ReactCSSTransitionGroup>
@@ -118,9 +118,9 @@ module.exports = React.createClass({
   createModule: function(args) {
     var type = args.type
     var data = args.data
-    var key = this.state ? this.state.lastModuleKey+1 : 0;
+    var ID = this.state ? this.state.lastModuleID+1 : 0;
     return {
-      key: key,
+      ID: ID,
       type: type,
       data: data
     }
@@ -132,13 +132,14 @@ module.exports = React.createClass({
     var module = this.createModule(args)
     modules.push(module)
     // update state with new modules array
-    this.setState({modules: modules, lastModuleKey: module.key} )
+    this.setState({modules: modules, lastModuleID: module.ID} )
   },
 
-  removeModule: function(key) {
+  removeModule: function(ID) {
+    console.log(ID)
     var modules = this.state.modules
     modules.some((module,i) => {
-      if(module.key == key) {
+      if(module.ID == ID) {
         // when hiding welcome message, save in cookie to disable showing in future
         if(modules[i].type=="welcome") cookie.save('hideWelcome', true)
         // remove module
@@ -151,9 +152,9 @@ module.exports = React.createClass({
 
   addMessage: function(message) {
     var messages = this.state.messages
-    var key = this.state.lastMessageKey+1
-    messages.push({key: key, type: message.type, content: message.content})
-    this.setState({messages: messages, lastMessageKey: key} )
+    var ID = this.state.lastMessageID+1
+    messages.push({ID: ID, type: message.type, content: message.content})
+    this.setState({messages: messages, lastMessageID: ID} )
   },
 
   removeMessage: function(index) {

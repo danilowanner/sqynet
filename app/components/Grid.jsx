@@ -45,16 +45,16 @@ module.exports = React.createClass({
         var moduleProps = {
           do: this.props.do,
           user: this.props.user,
+          ID: module.ID,
           type: module.type,
-          key: module.key,
           data: module.data,
           index: i,
           onHeightChange: this.onModuleHeightChange
         }
         return (
-          <div className="grid-item" key={module.key} style={styles}>
-            <div className="index">00.0{i}.00{module.key}</div>
-            <div className="close" onClick={this.props.do.bind(null,"removeModule",module.key)}>x<div> close</div></div>
+          <div className="grid-item" key={module.ID} style={styles}>
+            <div className="index">00.0{i}.00{module.ID}</div>
+            <div className="close" onClick={this.props.do.bind(null,"removeModule",module.ID)}>x<div> close</div></div>
             <Module {...moduleProps} />
           </div>
         )
@@ -79,7 +79,7 @@ module.exports = React.createClass({
     var modules = (this.state && this.state.modules) ? this.state.modules : [];
     // Update internal state to match modules from props
     targetModules.forEach((targetModule,i) => {
-      var module = this.findModuleByKey(targetModule.key)
+      var module = this.findModuleByID(targetModule.ID)
       if(module) {
         // add existing module to results
         results.push(module);
@@ -93,11 +93,11 @@ module.exports = React.createClass({
     return results;
   },
 
-  findModuleByKey(key) {
+  findModuleByID(ID) {
     var modules = (this.state && this.state.modules) ? this.state.modules : [];
     var result
     modules.some((module) => {
-      if(module.key == key) {
+      if(module.ID == ID) {
         result = module
         return true
       }
@@ -107,7 +107,7 @@ module.exports = React.createClass({
   },
 
   createModule(props) {
-    props.width = props.type=="zones" ? 30 : 20
+    props.width = props.type=="zones" ? 34 : 22
     props.height = 10
     return props;
   },

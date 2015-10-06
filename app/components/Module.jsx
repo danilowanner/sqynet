@@ -24,8 +24,8 @@ module.exports = React.createClass({
     clearInterval(this.timer)
   },
   checkSize: function() {
-    var module = React.findDOMNode(this.refs.module)
-    var height = module.offsetHeight
+    var moduleEl = React.findDOMNode(this.refs.module)
+    var height = moduleEl.offsetHeight
     if(height != this.state.contentHeight) this.updateSize(height);
   },
   updateSize: function(height) {
@@ -85,6 +85,7 @@ module.exports = React.createClass({
 
   /* Custom Methods */
   removeModule: function() {
-    this.props.do("removeModule",this.props.index)
+    console.log("remove "+this.props.ID)
+    this.props.do("removeModule",this.props.ID)
   }
 });

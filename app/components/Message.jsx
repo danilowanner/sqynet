@@ -36,7 +36,7 @@ module.exports = React.createClass({
     return (
       <div className={ "Message "+this.props.type } onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <div className="time">
-          <div className="segment">0{ this.props.index }.0{ this.props.messageKey }</div>
+          <div className="segment">0{ this.props.index }.0{ this.props.ID }</div>
           <div className="segment">0{ (this.state.maxTime-this.state.time)/1000 }</div>
         </div>
         { this.props.content }
