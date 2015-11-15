@@ -1,5 +1,8 @@
 require('whatwg-fetch');
 
+console.log(process.env.NODE_ENV)
+var apiURL = process.env.NODE_ENV=="development" ? 'http://public-api.dev.sqynet.ch/' : 'http://public-api.sqynet.ch/'
+
 module.exports.getAPI = function(path) {
   var config = {
     method: 'get',
@@ -9,7 +12,7 @@ module.exports.getAPI = function(path) {
     credentials: 'include'
   }
 
-  return window .fetch('http://public-api.sqynet.ch/'+path,config)
+  return window .fetch(apiURL+path,config)
                 .then(function(response) {
                   return response.json()
                 })
@@ -25,7 +28,7 @@ module.exports.postAPI = function(path, formData) {
     body: formData
   }
 
-  return window .fetch('http://public-api.sqynet.ch/'+path,config)
+  return window .fetch(apiURL+path,config)
                 .then(function(response) {
                   return response.json()
                 })
