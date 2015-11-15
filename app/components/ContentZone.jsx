@@ -1,6 +1,8 @@
 var React = require('react/addons');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
+var SvgTimeline = require('./SvgTimeline.jsx')
+
 var helpers = require('../helpers.js')
 
 module.exports = React.createClass({
@@ -8,11 +10,14 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       loading: true,
-      zone: null
+      zone: null,
+      loadingCounts: true,
+      zoneCounts: null,
     };
   },
   componentDidMount: function() {
     this.apiGetZone()
+    this.apiGetZoneCounts()
   },
 
   render: function () {
@@ -29,7 +34,7 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="icon-and-text">
-          <div class="icon">
+          <div className="icon">
             <iframe className="icon" src={ zone.SurveillanceID ? "assets/sqynet_satellite.svg" : "assets/sqynet_globe.svg" }></iframe>
           </div>
           <p>
@@ -43,6 +48,7 @@ module.exports = React.createClass({
           <li className="legion">Legion: <em>{zone.LegionCount}</em></li>
           <li className="faceless">Faceless: <em>{zone.FacelessCount}</em></li>
         </ul>
+        <SvgTimeline counts={this.state.zoneCounts} />
         <p>
           {
             zone.SurveillanceID ?
@@ -66,6 +72,19 @@ module.exports = React.createClass({
       this.props.do("addMessage",{type: "error", content: json.errorString})
     } else {
       this.setState({loading: false, zone: json.zone})
+    }
+  },
+  apiGetZoneCounts: function() {
+    helpers.getAPI('getZoneCounts/?zoneid='+this.props.zoneid)
+      .then(this.onGetCountsResponse)
+      .catch(this.onFail)
+  },
+  onGetCountsResponse: function(json) {
+    if(json.error) {
+      console.log(json)
+      this.props.do("addMessage",{type: "error", content: json.errorString})
+    } else {
+      this.setState({loadingCounts: false, zoneCounts: json.zoneCounts})
     }
   },
   addSurveillance: function() {
