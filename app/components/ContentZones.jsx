@@ -30,7 +30,8 @@ module.exports = React.createClass({
     return (
       <div key="form">
         <form onSubmit={this.handleSubmit} ref="form">
-          <FormField name="search" label="Search" value="" />
+          <FormField name="search" label="Search (ID or name)" value="" />
+          <FormField name="country" label="Country" value="" />
           <p><input type="submit" value="Search zones" /></p>
         </form>
       </div>

@@ -375,8 +375,7 @@ iframe.icon {
 }
 
 /* ContentZones.jsx Component*/
-.ContentZones table tr {
-  cursor: pointer;
+.ContentZones {
 }
 
 /* ContentZone.jsx Component*/
@@ -406,6 +405,12 @@ iframe.icon {
   width: 100%;
   left: 0;
   top: 0;
+}
+
+/* FormField.jsx Component */
+.FormField label{
+  line-height: 1.2em;
+  margin-bottom: 0.2em;
 }
 
 /* slideInOut CSS Transition */
@@ -558,7 +563,7 @@ iframe.icon {
 
   .grid-item .index,
   .grid-item .close {
-    ont-size: 0.95em;
+    font-size: 0.95em;
     font-weight: bold;
   }
 }
