@@ -21,6 +21,12 @@ module.exports = React.createClass({
     this.props.do('addModule',{type: "zones"})
   },
 
+  _pickVerifyer: function() {
+    var verifyers = ["ElphCrimLester", "Lithagon"]
+    var index = Math.floor(this.props.user.ID/4)%verifyers.length
+    return verifyers[index]
+  },
+
   render: function () {
 
     var loggedOut =
@@ -40,7 +46,7 @@ module.exports = React.createClass({
           Welcome {this.props.user.Username}!
         </p>
         <p>
-          Now you need to verify your faction. You do this by sending an in-game message to Lithagon containing your account e-mail ({this.props.user.Email}).
+          Now you need to verify your faction. You do this by sending an in-game message to { this._pickVerifyer() } containing your account e-mail ({this.props.user.Email}).
         </p>
       </div>
     var loggedInSwarm =
