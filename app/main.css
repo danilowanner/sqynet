@@ -202,9 +202,10 @@ iframe.icon {
 
 /* Grid.jsx Component */
 .Grid {
+  padding: 1em 0.5em 4.8em 0.5em;
 }
 .rc-autoresponsive-container {
-  padding: 1em 0.5em 4em 0.5em;
+
 }
 .rc-autoresponsive-container:before,
 .rc-autoresponsive-container:after {
@@ -214,10 +215,10 @@ iframe.icon {
 .rc-autoresponsive-container:after {
   clear: both;
 }
-.rc-autoresponsive-container .grid-item {
+.Grid .grid-item {
   padding: 1.2em 0 0 0;
 }
-.rc-autoresponsive-container .grid-item .Module{
+.Grid .grid-item .Module{
   width: calc(100% - 1em);
   margin-left: 0.5em;
 }
@@ -506,7 +507,7 @@ iframe.icon {
 
 
 /* Mobile and Tablet styles */
-@media (max-width: 659px) {
+@media (max-width: 669px) {
   body {
     font-size: 15px;
   }
@@ -561,9 +562,16 @@ iframe.icon {
     max-height: 50vh;
   }
 
+  /* Grid.jsx Component */
+  .Grid .grid-item {
+    position: relative;
+    padding: 2em 0px 0px;
+  }
+
   .grid-item .index,
   .grid-item .close {
     font-size: 0.95em;
+    top: -0.5em;
     font-weight: bold;
   }
 }

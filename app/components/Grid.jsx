@@ -4,6 +4,7 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var AutoResponsive = require('autoresponsive-react');
 var Module = require('./Module.jsx');
 
+var breakpoint = 669
 
 module.exports = React.createClass({
 
@@ -11,7 +12,8 @@ module.exports = React.createClass({
     return {
       modules: this.getModules(this.props.modules),
       autoresponsiveProps: this.getAutoresponsiveProps(),
-      gridHeight: 10
+      gridHeight: 10,
+      width: document.body.clientWidth,
     };
   },
   componentWillReceiveProps(nextProps) {
@@ -23,25 +25,33 @@ module.exports = React.createClass({
     window.addEventListener('resize', this.onResize, false);
   },
   onResize: function() {
-    this.setState({autoresponsiveProps: this.getAutoresponsiveProps()});
+    this.setState({width: document.body.clientWidth, autoresponsiveProps: this.getAutoresponsiveProps()});
   },
 
   render: function () {
     return (
       <div className="Grid">
-        <AutoResponsive {...this.state.autoresponsiveProps} >
-          { this.renderModules() }
-        </AutoResponsive>
+        {
+          this.state.width > breakpoint
+          ?
+            <AutoResponsive {...this.state.autoresponsiveProps} >
+              { this.renderModules(true) }
+            </AutoResponsive>
+          :
+            this.renderModules(false)
+        }
       </div>
     )
   },
-  renderModules: function() {
+  renderModules: function(setSize) {
     return this.state.modules.map((module, i) => {
-        // set width and height, limit width to containerWidth
-        var styles = {
-              width: Math.min(module.width*this.state.autoresponsiveProps.gridWidth, this.state.autoresponsiveProps.containerWidth),
-              height: module.height*this.state.gridHeight
-            }
+        var styles = {}
+        if(setSize) {
+          // set width and height, limit width to containerWidth
+          styles.width = Math.min(module.width*this.state.autoresponsiveProps.gridWidth, this.state.autoresponsiveProps.containerWidth),
+          styles.height = module.height*this.state.gridHeight
+        }
+
         var moduleProps = {
           do: this.props.do,
           user: this.props.user,
@@ -63,7 +73,7 @@ module.exports = React.createClass({
 
   /* Custom Methods */
   getAutoresponsiveProps: function() {
-    var em = document.body.clientWidth > 659 ? 17 : 15 /* mobile breakpoint at 659px */
+    var em = document.body.clientWidth > breakpoint ? 17 : 15 /* mobile breakpoint at 659px */
     return {
       containerWidth: document.body.clientWidth-1*em, /* 1em border-width */
       gridWidth: em, /* 1em grid-width */
