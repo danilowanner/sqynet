@@ -7,6 +7,8 @@ var ContentZones = require('./ContentZones.jsx');
 var ContentZone = require('./ContentZone.jsx');
 var ContentRegion = require('./ContentRegion.jsx');
 var ContentAreas = require('./ContentAreas.jsx');
+var ContentHelp = require('./ContentHelp.jsx');
+var ContentReset = require('./ContentReset.jsx');
 
 module.exports = React.createClass({
 
@@ -69,6 +71,14 @@ module.exports = React.createClass({
         }
         var title = <h1>Region {this.props.data.regionid}</h1>
         var content = <ContentRegion do={this.props.do} regionid={this.props.data.regionid}/>
+        break;
+      case "help":
+        var title = <h1>sQynet Help</h1>;
+        var content = <ContentHelp do={this.props.do} user={this.props.user}/>
+        break;
+      case "resetpassword":
+        var title = <h1>Reset sQynet Password</h1>;
+        var content = <ContentReset do={this.props.do} user={this.props.user}/>
         break;
       default:
         var title = <h1>{ this.props.type }</h1>;
