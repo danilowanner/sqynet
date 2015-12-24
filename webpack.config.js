@@ -12,7 +12,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx$/, loaders: ['jsx?harmony'] },
+      { test: /\.jsx$/, loaders: ['babel'] },
       { test: /autoresponsive-react.*\.js$/, loaders: ['babel'] },
       { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' }
     ]

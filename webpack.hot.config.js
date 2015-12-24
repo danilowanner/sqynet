@@ -22,7 +22,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx$/, loaders: ['react-hot','jsx?harmony'] },
+      { test: /\.jsx$/, loaders: ['react-hot', 'babel'] },
       { test: /autoresponsive-react.*\.js$/, loaders: ['babel'] },
       { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' }
     ]

@@ -1,5 +1,4 @@
 var React = require('react');
-var Resizable = require('react-component-resizable');
 
 var ContentWelcome = require('./ContentWelcome.jsx');
 var ContentRegistrationForm = require('./ContentRegistrationForm.jsx');
